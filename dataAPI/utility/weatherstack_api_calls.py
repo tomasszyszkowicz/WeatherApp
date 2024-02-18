@@ -38,6 +38,7 @@ class WeatherstackAPICall(APICall):
         self.params = {
             "access_key": WeatherstackAPICall.api_key,
             "query": self.location,
+            "hourly": 1,
         }
 
         super().__init__(self.url, self.params)

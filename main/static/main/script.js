@@ -74,3 +74,33 @@ function fetchData(location) {
         })
         .catch(error => console.error('Error:', error));
 }
+
+function redirectToStats() {
+    // Get the location
+    var location = document.getElementById('locationHeader').innerText;
+    var date = createDateString();    
+
+    // Redirect to stats page with location parameter
+    window.location.href = "/stats/?location=" + location + "&date=" + date;
+}
+
+
+function createDateString() {
+    // Get the current date
+    var currentDate = new Date();
+
+    // Extract year, month, and day from the date
+    var year = currentDate.getFullYear();
+    var month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
+    var day = String(currentDate.getDate()).padStart(2, '0');
+
+    // Format the date as "year-month-day"
+    var formattedDate = year + '-' + month + '-' + day;
+
+    // Return the formatted date
+    console.log(formattedDate);
+    return formattedDate;
+}
+
+
+

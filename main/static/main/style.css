@@ -1,0 +1,220 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+h1, .sub-heading {
+    color: #333;
+}
+
+p {
+    font-size: 18px;
+    color: #555;
+}
+
+a {
+    display: inline-block;
+    padding: 10px 10px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+a:hover {
+    background-color: #0056b3;
+}
+
+.top-right-container {
+    position: absolute;
+    top: 20px; 
+    right: 20px; 
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    z-index: 10;
+}
+
+.plot-container {
+    background-color: #ffffff;
+    padding: 10px;
+    width: 100%;
+    max-width: 640px;
+    margin: 30px auto;
+    margin-top: 0;
+    margin-bottom: 0px;
+    font-size: 14px;
+    position: relative;
+    height: 300px;
+    z-index: 1;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.plot-container * {
+    border: none;
+    border-radius: none;
+    box-shadow: none;
+}
+
+.form-container {
+    background-color: #ffffff;
+    padding: 20px;
+    margin: 20px auto;
+    margin-top: 30px;
+    margin-bottom: 0px;
+    width: 20%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+}
+
+.checkbox-group {
+    font-size: 13px;
+}
+
+.checkbox-group, .date-input {
+    margin-bottom: 20px;
+}
+
+.checkbox-group input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.date-input input[type="date"] {
+    margin-left: 5px;
+}
+
+.form-container button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.form-container button:hover {
+    background-color: #0056b3;
+}
+
+.modebar {
+        display: none;
+}
+
+.nav-link {
+    display: block;
+    padding: 8px 15px;
+    margin: 5px 0;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.nav-link:hover, .nav-link:focus {
+    background-color: #0056b3;
+}
+
+.top-left-container {
+    position: absolute;
+    top: 20px; 
+    left: 20px; 
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+}
+
+.container, .sub-container-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    align-items: flex-start; 
+}
+
+.sub-container-wrapper {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap */
+    align-items: flex-start; 
+    justify-content: center; /* Center the items horizontally */
+    margin: 0 auto;
+    max-width: 660px; /* Adjust based on your layout's width */
+}
+
+.left-wrapper {
+    flex: 1; 
+    margin-right: 10px;
+    margin-left: 0;
+}
+
+.right-wrapper {
+    flex: 1;
+    margin-right: 0;
+    margin-left: 10px;
+}
+
+.sub-container {
+    flex: 1; 
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+h1, .sub-heading {
+    color: #333;
+}
+
+@keyframes fadeOutIn {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.plot-container.animating {
+    animation: fadeOutIn 1.3s ease;
+}
+
+.forecast-container {
+    background-color: #ffffff;
+    padding: 0px;
+    width: 100%;
+    max-width: 640px;
+    margin: 20px auto;
+    font-size: 14px;
+    position: relative;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    display: flex; /* Use flexbox to place items next to each other */
+    justify-content: space-between; /* Add space between items */
+}
+
+.day-container {
+    background-color: #ffffff;
+    padding: 10px;
+    width: calc(100% / 7 - 20px); /* Divide the width equally among 7 containers and adjust for margin */
+    font-size: 7px;
+    position: relative;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    margin: 5px;
+}
+
+.day-container p {
+    font-size: 12px; /* Override the font-size */
+    color: black; /* Override the color */
+}
