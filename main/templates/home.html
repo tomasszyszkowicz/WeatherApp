@@ -1,9 +1,10 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>frient A/S - HA Indoor Monitor</title>
+    <title>Weather App</title>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <style>
         body {
@@ -54,11 +55,12 @@
             background-color: #ffffff;
             padding: 10px;
             width: 100%;
-            max-width: 600px;
+            max-width: 640px;
             margin: 30px auto;
             margin-top: 0;
             font-size: 14px;
             position: relative;
+            height: 300px;
             z-index: 1;
             border-radius: 8px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
@@ -157,7 +159,7 @@
             align-items: flex-start; 
             justify-content: center; /* Center the items horizontally */
             margin: 0 auto;
-            max-width: 620px; /* Adjust based on your layout's width */
+            max-width: 660px; /* Adjust based on your layout's width */
         }
 
         .left-wrapper {
@@ -194,6 +196,38 @@
         .plot-container.animating {
             animation: fadeOutIn 1.3s ease;
         }
+
+        .forecast-container {
+            background-color: #ffffff;
+            padding: 0px;
+            width: 100%;
+            max-width: 640px;
+            margin: 30px auto;
+            margin-top: 0;
+            font-size: 14px;
+            position: relative;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            display: flex; /* Use flexbox to place items next to each other */
+            justify-content: space-between; /* Add space between items */
+        }
+
+        .day-container {
+            background-color: #ffffff;
+            padding: 10px;
+            width: calc(100% / 7 - 20px); /* Divide the width equally among 7 containers and adjust for margin */
+            font-size: 7px;
+            position: relative;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .day-container p {
+            font-size: 12px; /* Override the font-size */
+            color: black; /* Override the color */
+        }
+
+
     </style>
 </head>
 <body>
@@ -208,6 +242,76 @@
         <p><b>Weather App</b></p>
         <a>Home</a>
     </div>
+
+    <div class="sub-container-wrapper">
+
+        <div class="left-wrapper">
+
+            <div class="sub-container">
+                <input type="text" id="locationInput" placeholder="Prague">
+                <a onclick="submitLocation()">Get weather</a>
+            </div>
+
+            <div class="sub-container">
+                <a>Save location</a>
+            
+            </div>
+
+
+        </div>
+
+        <div class="right-wrapper">
+
+            <div class="sub-container">
+                <h2><span id="locationHeader">Prague</span></h2>
+                <p style="margin-bottom: 7px;"><span id="weatherDescription"></span></p>
+                <img id="weatherIcon"><br>
+                <p style="margin-top: 7px;">Temperature: <span id="temperature"></span> °C</p>
+                <p>Humidity: <span id="humidity"></span> %</p>
+                <p>Wind speed: <span id="windSpeed"></span> km/h</p>
+                <a>Additional stats</a>
+                
+
+            </div>
+
+
+        </div>
+
+
+
+    </div>
+    <div class="plot-container" id="plot"></div>
+    <div class="forecast-container">
+        <div class="day-container"></div>
+        <div class="day-container"></div>
+        <div class="day-container"></div>
+        <div class="day-container"></div>
+        <div class="day-container"></div>
+        <div class="day-container"></div>
+        <div class="day-container"></div>
+    </div>
+    <div class="sub-container-wrapper">
+        <div class="left-wrapper">
+            <div class="sub-container">
+
+            </div>
+        </div>
+        <div class="right-wrapper">
+            <div class="sub-container"></div>
+
+        </div>
+
+
+    </div>
+
+    <script>
+
+        window.onload = function() {
+            submitLocation("Prague");
+        };
+
+    </script>
     
+    <script src="{% static 'main/script.js' %}"></script>
 </body>
 </html>
