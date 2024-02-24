@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.http import HttpRequest, HttpResponse, JsonResponse
 from .utility.weatherstack.weatherstack_api_calls import (
     CurrentWeather,
-    HistoricalWeather,
     ForecastAPICall,
 )
 
@@ -20,10 +19,10 @@ def api_check(request):
 def current_weather(request):
     return CurrentWeather(request).get_current_weather()
 
-
+"""
 def historical_weather(request):
     return HistoricalWeather("Ostrava").get_historical_weather()
-
+"""
 
 def forecast_weather(request):
     return ForecastWeather(request).get_forecast_weather()
@@ -40,3 +39,4 @@ def forecast_weather_plot(request):
 def forecast_speficic_day(request):
     date = request.GET.get("date")
     return ForecastWeather(request).get_specific_forecast_day(date)
+

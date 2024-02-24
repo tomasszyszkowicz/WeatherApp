@@ -83,7 +83,7 @@ class ForecastAPICall(WeatherstackAPICall):
 
 
 
-
+"""
 class HistoricalWeather(WeatherstackAPICall):
 
     endpoint = "historical"
@@ -97,3 +97,4 @@ class HistoricalWeather(WeatherstackAPICall):
     def get_historical_weather(self):
 
         return JsonResponse(self.historical_weather)
+"""
