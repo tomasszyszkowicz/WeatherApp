@@ -28,8 +28,15 @@
         <div class="left-wrapper">
 
             <div class="sub-container">
-                <input type="text" id="locationInput" placeholder="Prague">
-                <a onclick="submitLocation()">Get weather</a>
+                <h2><span id="locationHeader">{{ location }}</span></h2>
+                <p style="margin-bottom: 7px;"><span id="weatherDescription"></span></p>
+                <img id="weatherIcon"><br>
+                <p style="margin-top: 7px;">Temperature: <span id="temperature"></span> °C</p>
+                <p>Humidity: <span id="humidity"></span> %</p>
+                <p>Wind speed: <span id="windSpeed"></span> km/h</p>
+                <a onclick="redirectToStats()">Additional Stats</a>
+                
+
             </div>
 
 
@@ -38,7 +45,7 @@
         <div class="right-wrapper">
 
             <div class="sub-container">
-                <h2><span id="locationHeader">Prague</span></h2>
+                <h2><span id="locationHeader">{{ location }}</span></h2>
                 <p style="margin-bottom: 7px;"><span id="weatherDescription"></span></p>
                 <img id="weatherIcon"><br>
                 <p style="margin-top: 7px;">Temperature: <span id="temperature"></span> °C</p>

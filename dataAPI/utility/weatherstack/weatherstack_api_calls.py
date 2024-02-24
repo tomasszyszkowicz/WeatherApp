@@ -39,7 +39,9 @@ class WeatherstackAPICall(APICall):
             "access_key": WeatherstackAPICall.api_key,
             "query": self.location,
             "hourly": 1,
-        }
+            #"interval": 1,
+             
+                      }
 
         super().__init__(self.url, self.params)
 
@@ -65,50 +67,21 @@ class CurrentWeather(WeatherstackAPICall):
         return JsonResponse(self.current_weather)
 
 
-class ForecastWeather(WeatherstackAPICall):
+class ForecastAPICall(WeatherstackAPICall):
     endpoint = "forecast"
 
     def __init__(self, request):
 
         location = request.GET.get("location")
 
-        super().__init__(ForecastWeather.endpoint, location)
+        super().__init__(ForecastAPICall.endpoint, location)
 
         self.forecast_weather = self.data["forecast"]
 
     def get_forecast_weather(self):
-        return JsonResponse(self.forecast_weather)
-    
-    def get_forecast_data_to_display(self):
-
-        temperatures = [
-            self.forecast_weather[date]["avgtemp"] for date in self.forecast_weather
-        ]
-        dates = [date for date in self.forecast_weather]
-
-        return JsonResponse({'temperatures': temperatures, 'dates': dates})
+        return self.forecast_weather
 
 
-    def forecast_plot(self):
-
-        temperatures = [
-            self.forecast_weather[date]["avgtemp"] for date in self.forecast_weather
-        ]
-        dates = [date for date in self.forecast_weather]
-
-        plot = go.Figure()
-        plot.add_trace(
-            go.Scatter(
-                x=dates, y=temperatures, mode="lines+markers", name="Temperature"
-            )
-        )
-
-        title_text = "Temperature in upcoming days in " + self.location
-        plot.update_layout(title=title_text, yaxis_title="Temperature (°C)")
-
-        plot_json = plot.to_json()
-
-        return JsonResponse({"plot": plot_json})
 
 
 class HistoricalWeather(WeatherstackAPICall):
