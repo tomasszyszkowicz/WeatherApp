@@ -1,200 +1,12 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>frient A/S - HA Indoor Monitor</title>
+    <title>Weather App</title>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-        }
-
-        h1, .sub-heading {
-            color: #333;
-        }
-
-        p {
-            font-size: 18px;
-            color: #555;
-        }
-
-        a {
-            display: inline-block;
-            padding: 10px 10px;
-            background-color: #007bff;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        a:hover {
-            background-color: #0056b3;
-        }
-
-        .top-right-container {
-            position: absolute;
-            top: 20px; 
-            right: 20px; 
-            background-color: #ffffff;
-            border: 1px solid #ccc;
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-            font-size: 14px;
-            z-index: 10;
-        }
-
-        .plot-container {
-            background-color: #ffffff;
-            padding: 10px;
-            width: 100%;
-            max-width: 600px;
-            margin: 30px auto;
-            margin-top: 0;
-            font-size: 14px;
-            position: relative;
-            z-index: 1;
-            border-radius: 8px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .plot-container * {
-            border: none;
-            border-radius: none;
-            box-shadow: none;
-        }
-
-        .form-container {
-            background-color: #ffffff;
-            padding: 20px;
-            margin: 20px auto;
-            margin-top: 30px;
-            margin-bottom: 0px;
-            width: 20%;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-            font-size: 14px;
-        }
-
-        .checkbox-group {
-            font-size: 13px;
-        }
-
-        .checkbox-group, .date-input {
-            margin-bottom: 20px;
-        }
-
-        .checkbox-group input[type="checkbox"] {
-            margin-right: 5px;
-        }
-
-        .date-input input[type="date"] {
-            margin-left: 5px;
-        }
-
-        .form-container button {
-            padding: 10px 15px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .form-container button:hover {
-            background-color: #0056b3;
-        }
-
-        .modebar {
-                display: none;
-        }
-
-        .nav-link {
-            display: block;
-            padding: 8px 15px;
-            margin: 5px 0;
-            background-color: #007bff;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-        .nav-link:hover, .nav-link:focus {
-            background-color: #0056b3;
-        }
-
-        .top-left-container {
-            position: absolute;
-            top: 20px; 
-            left: 20px; 
-            background-color: #ffffff;
-            border: 1px solid #ccc;
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-            font-size: 14px;
-        }
-
-        .container, .sub-container-wrapper {
-            max-width: 600px;
-            margin: 0 auto;
-            display: flex;
-            align-items: flex-start; 
-        }
-
-        .sub-container-wrapper {
-            display: flex;
-            flex-wrap: wrap; /* Allow items to wrap */
-            align-items: flex-start; 
-            justify-content: center; /* Center the items horizontally */
-            margin: 0 auto;
-            max-width: 620px; /* Adjust based on your layout's width */
-        }
-
-        .left-wrapper {
-            flex: 1; 
-            margin-right: 10px;
-            margin-left: 0;
-        }
-
-        .right-wrapper {
-            flex: 1;
-            margin-right: 0;
-            margin-left: 10px;
-        }
-
-        .sub-container {
-            flex: 1; 
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        h1, .sub-heading {
-            color: #333;
-        }
-
-        @keyframes fadeOutIn {
-            0% { opacity: 1; }
-            50% { opacity: 0; }
-            100% { opacity: 1; }
-        }
-
-        .plot-container.animating {
-            animation: fadeOutIn 1.3s ease;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'main/style.css' %}">
 </head>
 <body>
     <h1>Welcome to weather app</h1>
@@ -208,6 +20,75 @@
         <p><b>Weather App</b></p>
         <a>Home</a>
     </div>
+
+    <div class="sub-container-wrapper">
+
+        <div class="left-wrapper">
+
+            <div class="sub-container">
+                <h2>Current time</h2>
+                <p id="currentTime"></p>
+                <p id="currentDate"></p>
+            
+            </div>
+
+            <div class="sub-container">
+                <input type="text" id="locationInput" placeholder="Prague">
+                <a onclick="submitLocation()">Get weather</a>
+            </div>
+
+            <div class="sub-container">
+                <a>Save location</a>
+            
+            </div>
+
+
+        </div>
+
+        <div class="right-wrapper">
+
+            <div class="sub-container">
+                <h2><span id="locationHeader">Prague</span></h2>
+                <p style="margin-bottom: 7px;"><span id="weatherDescription"></span></p>
+                <img id="weatherIcon"><br>
+                <p style="margin-top: 7px;">Temperature: <span id="temperature"></span> °C</p>
+                <p>Humidity: <span id="humidity"></span> %</p>
+                <p>Wind speed: <span id="windSpeed"></span> km/h</p>
+                <p>Local date: <span id="localDate"></span></p>
+                <p>Local time: <span id="localTime"></span></p>
+                <a onclick="redirectToStats()">Additional Stats</a>
+                
+
+            </div>
+
+
+        </div>
+
+
+
+    </div>
+    <div class="plot-container" id="plot"></div>
+    <div class="forecast-container">
+        <div class="day-container" style="margin-left: 0px;"></div>
+        <div class="day-container"></div>
+        <div class="day-container"></div>
+        <div class="day-container"></div>
+        <div class="day-container"></div>
+        <div class="day-container"></div>
+        <div class="day-container" style="margin-right: 0px;"></div>
+    </div>
+    <p>click on specific date to see more info</p>
+
     
+    <script src="{% static 'main/script.js' %}"></script>
+
+    <script>
+        window.addEventListener('load', function() {
+            submitLocation("Prague");
+            createDateString();
+            displayTime();
+            displayDate();
+        });
+    </script>
 </body>
 </html>

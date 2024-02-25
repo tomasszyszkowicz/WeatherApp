@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ location }}</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link rel="stylesheet" href="{% static 'main/style.css' %}">
+</head>
+<body>
+
+    <h1 style="margin: 30px;">{{ location }} for {{ date }}</h1>
+    <div class="top-right-container">
+        <p><b>Logged in as:</b></p>
+        <p>{{ full_name }}</p>
+        <p>{{ user_email }}</p>
+        <a>Logout</a>
+    </div>
+    <div class="top-left-container">
+        <p><b>Weather App</b></p>
+        <a>Home</a>
+    </div>
+
+    <div class="plot-container" style="margin-bottom: 20px;" id="plot"></div>
+
+    <div class="sub-container-wrapper">
+
+        <div class="left-wrapper">
+
+            <div class="sub-container">
+                <h2><span id="locationHeader">{{ location }}</span></h2>
+                <p style="margin-bottom: 7px;"><span id="weatherDescription"></span></p>
+                <img id="weatherIcon"><br>
+                <p style="margin-top: 7px;">Sunrise: <span id="sunrise"></span></p>
+                <p>Sunset: <span id="sunset"></span></p>
+                <p>maxtemp: <span id="maxTemp"></span> °C</p>
+                <p>mintemp: <span id="minTemp"></span> °C</p>
+                
+
+            </div>
+
+
+        </div>
+
+        <div class="right-wrapper">
+
+            <div class="sub-container" id="hourlyTemperatures">
+            
+                
+
+            </div>
+
+
+        </div>
+
+        
+        
+
+        <script src="{% static 'main/stats.js' %}"></script>
+
+        <script>
+            window.addEventListener('load', function() {
+                fetchSpecificDay("{{ location }}", "{{ date }}");
+                fetchAndRenderPlot("{{ location }}", "{{ date }}");
+            });
+        </script>
+    
+</body>
+</html>
