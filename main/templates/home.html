@@ -26,6 +26,13 @@
         <div class="left-wrapper">
 
             <div class="sub-container">
+                <h2>Current time</h2>
+                <p id="currentTime"></p>
+                <p id="currentDate"></p>
+            
+            </div>
+
+            <div class="sub-container">
                 <input type="text" id="locationInput" placeholder="Prague">
                 <a onclick="submitLocation()">Get weather</a>
             </div>
@@ -47,6 +54,8 @@
                 <p style="margin-top: 7px;">Temperature: <span id="temperature"></span> °C</p>
                 <p>Humidity: <span id="humidity"></span> %</p>
                 <p>Wind speed: <span id="windSpeed"></span> km/h</p>
+                <p>Local date: <span id="localDate"></span></p>
+                <p>Local time: <span id="localTime"></span></p>
                 <a onclick="redirectToStats()">Additional Stats</a>
                 
 
@@ -60,25 +69,26 @@
     </div>
     <div class="plot-container" id="plot"></div>
     <div class="forecast-container">
+        <div class="day-container" style="margin-left: 0px;"></div>
         <div class="day-container"></div>
         <div class="day-container"></div>
         <div class="day-container"></div>
         <div class="day-container"></div>
         <div class="day-container"></div>
-        <div class="day-container"></div>
-        <div class="day-container"></div>
+        <div class="day-container" style="margin-right: 0px;"></div>
     </div>
     <p>click on specific date to see more info</p>
 
-    <script>
-
-        window.onload = function() {
-            submitLocation("Prague");
-            createDateString();
-        };
-
-    </script>
     
     <script src="{% static 'main/script.js' %}"></script>
+
+    <script>
+        window.addEventListener('load', function() {
+            submitLocation("Prague");
+            createDateString();
+            displayTime();
+            displayDate();
+        });
+    </script>
 </body>
 </html>

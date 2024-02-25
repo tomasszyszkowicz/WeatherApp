@@ -18,6 +18,8 @@ function submitLocation(location){
             document.getElementById('temperature').innerText = data.temperature;
             document.getElementById('humidity').innerText = data.humidity;
             document.getElementById('windSpeed').innerText = data.wind_speed;
+            //document.getElementById('time').innerText = data.time;
+           
         
         })
         .catch(error => console.error('Error:', error));
@@ -26,6 +28,7 @@ function submitLocation(location){
 
     fetchAndRenderPlot(location);
     fetchData(location);
+    fetchLocationData(location);
 
 
 
@@ -54,6 +57,21 @@ function renderPlot(plotData) {
     Plotly.newPlot('plot', data, layout);
 }
 
+function fetchLocationData(location) {
+    const url = `/data/location-info/?location=${encodeURIComponent(location)}`;
+
+    fetch(url)
+        .then(response => response.json())  // Parse the JSON from the response                 
+        .then(data => {
+            // Split the localtime string into date and time
+            var [date, time] = data.localtime.split(' ');
+
+            // Update the page elements with the new data
+            document.getElementById('localDate').innerText = date;
+            document.getElementById('localTime').innerText = time;
+        })
+}
+
 function fetchData(location) {
     const url = `/data/forecast-data/?location=${encodeURIComponent(location)}`;
     
@@ -64,21 +82,35 @@ function fetchData(location) {
             for (let i = 0; i < data.temperatures.length && i < data.dates.length; i++) {
                 const temperature = data.temperatures[i];
                 const date = data.dates[i];
+                const dateObject = new Date(date); // Convert date string to Date object
+                
+                // Get the day of the week
+                const options = { weekday: 'long' };
+                const dayOfWeek = dateObject.toLocaleDateString(undefined, options);
                 
                 // Select the corresponding day-container element
                 const dayContainer = document.querySelectorAll('.day-container')[i];
                 
-                // Update the contents of the day-container with temperature and date
-                dayContainer.innerHTML = `<p>${date}</p><p>${temperature} °C</p>`;
+                // Update the contents of the day-container with day of week and temperature
+                dayContainer.innerHTML = `<p>${date}</p><p>${dayOfWeek}</p><p>${temperature} °C</p>`;
+
+                // Add event listener to the day-container
+                dayContainer.addEventListener('click', function() {
+                    redirectToStats(data.dates[i]); // Pass the original date string to redirectToStats
+                });
             }
         })
         .catch(error => console.error('Error:', error));
 }
-
-function redirectToStats() {
+function redirectToStats(date) {
     // Get the location
     var location = document.getElementById('locationHeader').innerText;
-    var date = createDateString();    
+
+    //only do the below if date is not defined
+    if (date === undefined) {
+        // Get the date
+        date = document.getElementById('localDate').innerText;
+    }
 
     // Redirect to stats page with location parameter
     window.location.href = "/stats/?location=" + location + "&date=" + date;
@@ -101,6 +133,25 @@ function createDateString() {
     console.log(formattedDate);
     return formattedDate;
 }
+
+
+//function to get current date and display it in the header
+
+function displayDate() {
+    var currentDate = new Date();
+    var date = currentDate.toDateString();
+    document.getElementById('currentDate').innerText = date;
+}
+
+//function to get current time and display it in the header
+
+function displayTime() {        
+    var currentTime = new Date();
+    var time = currentTime.toLocaleTimeString();
+    document.getElementById('currentTime').innerText = time;
+}
+
+
 
 
 

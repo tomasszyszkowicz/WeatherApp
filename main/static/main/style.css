@@ -190,15 +190,12 @@ h1, .sub-heading {
 }
 
 .forecast-container {
-    background-color: #ffffff;
     padding: 0px;
     width: 100%;
-    max-width: 640px;
+    max-width: 660px;
     margin: 20px auto;
     font-size: 14px;
     position: relative;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     display: flex; /* Use flexbox to place items next to each other */
     justify-content: space-between; /* Add space between items */
 }
@@ -212,6 +209,12 @@ h1, .sub-heading {
     border-radius: 8px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     margin: 5px;
+    margin-top: 0px;
+    transition: background-color 0.3s ease; /* Add transition for smooth color change */
+}
+
+.day-container:hover {
+    background-color: #cccccc; /* Change background color on hover */
 }
 
 .day-container p {

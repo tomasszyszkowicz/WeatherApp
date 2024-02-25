@@ -10,8 +10,7 @@
 </head>
 <body>
 
-    <h1>Stats for specific day</h1>
-    <h1>{{ location }} for {{ date }}</h1>
+    <h1 style="margin: 30px;">{{ location }} for {{ date }}</h1>
     <div class="top-right-container">
         <p><b>Logged in as:</b></p>
         <p>{{ full_name }}</p>
@@ -23,6 +22,8 @@
         <a>Home</a>
     </div>
 
+    <div class="plot-container" style="margin-bottom: 20px;" id="plot"></div>
+
     <div class="sub-container-wrapper">
 
         <div class="left-wrapper">
@@ -31,10 +32,10 @@
                 <h2><span id="locationHeader">{{ location }}</span></h2>
                 <p style="margin-bottom: 7px;"><span id="weatherDescription"></span></p>
                 <img id="weatherIcon"><br>
-                <p style="margin-top: 7px;">Temperature: <span id="temperature"></span> °C</p>
-                <p>Humidity: <span id="humidity"></span> %</p>
-                <p>Wind speed: <span id="windSpeed"></span> km/h</p>
-                <a onclick="redirectToStats()">Additional Stats</a>
+                <p style="margin-top: 7px;">Sunrise: <span id="sunrise"></span></p>
+                <p>Sunset: <span id="sunset"></span></p>
+                <p>maxtemp: <span id="maxTemp"></span> °C</p>
+                <p>mintemp: <span id="minTemp"></span> °C</p>
                 
 
             </div>
@@ -44,20 +45,26 @@
 
         <div class="right-wrapper">
 
-            <div class="sub-container">
-                <h2><span id="locationHeader">{{ location }}</span></h2>
-                <p style="margin-bottom: 7px;"><span id="weatherDescription"></span></p>
-                <img id="weatherIcon"><br>
-                <p style="margin-top: 7px;">Temperature: <span id="temperature"></span> °C</p>
-                <p>Humidity: <span id="humidity"></span> %</p>
-                <p>Wind speed: <span id="windSpeed"></span> km/h</p>
-                <a onclick="redirectToStats()">Additional Stats</a>
+            <div class="sub-container" id="hourlyTemperatures">
+            
                 
 
             </div>
 
 
         </div>
+
+        
+        
+
+        <script src="{% static 'main/stats.js' %}"></script>
+
+        <script>
+            window.addEventListener('load', function() {
+                fetchSpecificDay("{{ location }}", "{{ date }}");
+                fetchAndRenderPlot("{{ location }}", "{{ date }}");
+            });
+        </script>
     
 </body>
 </html>

@@ -22,7 +22,7 @@ class APICall:
             return data
 
     def get_data(self):
-        return JsonResponse(self.data)
+        return self.data
 
 
 class WeatherstackAPICall(APICall):
@@ -39,14 +39,14 @@ class WeatherstackAPICall(APICall):
             "access_key": WeatherstackAPICall.api_key,
             "query": self.location,
             "hourly": 1,
-            #"interval": 1,
+            "interval": 1,
              
                       }
 
         super().__init__(self.url, self.params)
 
 
-class CurrentWeather(WeatherstackAPICall):
+class CurrentAPICall(WeatherstackAPICall):
 
     endpoint = "current"
 
@@ -54,17 +54,10 @@ class CurrentWeather(WeatherstackAPICall):
 
         location = request.GET.get("location")
 
-        super().__init__(CurrentWeather.endpoint, location)
+        super().__init__(CurrentAPICall.endpoint, location)
 
-        self.current_weather = self.data["current"]
+        #self.current_weather = self.data["current"]
 
-    def get_attribute(self, attribute):
-
-        return self.current_weather.get(attribute)
-
-    def get_current_weather(self):
-
-        return JsonResponse(self.current_weather)
 
 
 class ForecastAPICall(WeatherstackAPICall):
@@ -76,11 +69,7 @@ class ForecastAPICall(WeatherstackAPICall):
 
         super().__init__(ForecastAPICall.endpoint, location)
 
-        self.forecast_weather = self.data["forecast"]
-
-    def get_forecast_weather(self):
-        return self.forecast_weather
-
+        #self.forecast_weather = self.data["forecast"]
 
 
 """

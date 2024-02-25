@@ -1,11 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpRequest, HttpResponse, JsonResponse
-from .utility.weatherstack.weatherstack_api_calls import (
-    CurrentWeather,
-    ForecastAPICall,
-)
+
 
 from .utility.read_utils.forecast import ForecastWeather
+from .utility.read_utils.current import CurrentWeather  
 import json
 import plotly.graph_objs as go
 
@@ -18,6 +16,9 @@ def api_check(request):
 
 def current_weather(request):
     return CurrentWeather(request).get_current_weather()
+
+def location_info(request):
+    return CurrentWeather(request).get_location_info()
 
 """
 def historical_weather(request):
@@ -39,4 +40,8 @@ def forecast_weather_plot(request):
 def forecast_speficic_day(request):
     date = request.GET.get("date")
     return ForecastWeather(request).get_specific_forecast_day(date)
+
+def forecast_speficic_day_plot(request):
+    date = request.GET.get("date")
+    return ForecastWeather(request).day_plot(date)
 
