@@ -1,0 +1,13 @@
+asgiref==3.7.2
+certifi==2024.2.2
+charset-normalizer==3.3.2
+Django==5.0.3
+idna==3.6
+packaging==23.2
+plotly==5.19.0
+requests==2.31.0
+sqlparse==0.4.4
+tenacity==8.2.3
+typing_extensions==4.10.0
+urllib3==2.2.1
+gunicorn==20.1.0
