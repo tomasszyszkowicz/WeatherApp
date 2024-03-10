@@ -14,9 +14,9 @@ COPY . /app/
 
 # You can run migrations and collect static files here, or you can handle them in an entrypoint script or manually
 RUN python3 manage.py migrate
-
+RUN python3 manage.py collectstatic --noinput
 # Make port 8000 available to the world outside this container
 EXPOSE 8000
 
-# Run the Django development server
+# Run Gunicorn to serve the Django application
 CMD ["gunicorn", "weather_app.wsgi:application", "--bind", "0.0.0.0:8000"]
