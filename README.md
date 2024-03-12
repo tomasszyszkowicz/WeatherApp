@@ -20,7 +20,7 @@ Simple weather app using weatherstack API.
 You can clone the project using this:
 
 ```bash
-git clone git@gitlab.com:profiq/all/sp/HomeAssistantAutomation/ha_indoor_monitor.git
+git clone git@github.com:tomasszyszkowicz/WeatherApp.git
 ```
 
 Remember that you need to setup the SSH key on your machine.
@@ -28,7 +28,7 @@ Remember that you need to setup the SSH key on your machine.
 Do this to navigate to the root of the project:
 
 ```bash
-cd ha_indoor_monitor
+cd WeatherApp
 ```
 
 ## Setup the Virtual Environment
