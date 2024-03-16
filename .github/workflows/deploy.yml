@@ -19,3 +19,4 @@ jobs:
         echo ":$HEROKU_API_KEY" | docker login --username=_ --password-stdin registry.heroku.com
         heroku container:push web --app forecast-genius
         heroku container:release web --app forecast-genius
+
