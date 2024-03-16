@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-#4%v6+j8vyk!n6oj+o0u31i7(#tyw@8i6t-=gl&y#k=7nx=&vv
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1", "0.0.0.0"]
+ALLOWED_HOSTS = ["127.0.0.1", "0.0.0.0", "forecast-genius-e37be46199d1.herokuapp.com"]
 
 
 # Application definition
@@ -144,3 +144,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = 'login'
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://forecast-genius-e37be46199d1.herokuapp.com',
+]
