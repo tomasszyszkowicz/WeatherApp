@@ -9,13 +9,12 @@
         .errorlist {
             color: red;
         }
-        /* Additional styles */
     </style>
 </head>
 <body>
     {% if user.is_authenticated %}
         <p>You are already logged in as {{ user.username }}.</p>
-        <a href="{% url 'home' %}">Go to Home Page</a> <!-- Adjust 'home' to your home page URL name -->
+        <a href="{% url 'home' %}">Go to Home Page</a>
         <a href="{% url 'logout' %}">Logout</a>
     {% else %}
         <p>Please log in</p>

@@ -1,18 +1,8 @@
-from django.shortcuts import render
-
-
-from django.contrib.auth import logout
-from django.shortcuts import redirect
-from django.contrib.auth import authenticate, login
-from django.contrib import messages
-from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.forms import UserCreationForm
+from .forms import CustomUserCreationForm
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-
-from .forms import CustomUserCreationForm
 
 
 @login_required
@@ -20,58 +10,85 @@ def home_page(request):
     """
     Renders the home page.
 
-    Paramaters:
-        request: The HTTP request object.
+    Parameters:
+        request (HttpRequest): The HTTP request object.
 
     Returns:
-        The rendered home.html template.
+        HttpResponse: The rendered home.html template.
     """
     return render(request, "home.html")
+
 
 @login_required
 def stats_page(request):
     """
     Renders the stats page.
 
-    Paramaters:
-        request: The HTTP request object.
+    Parameters:
+        request (HttpRequest): The HTTP request object.
 
     Returns:
-        The rendered stats.html template with the location and date as context variables.
+        HttpResponse: The rendered stats.html template with the location and date as context variables.
     """
     location = request.GET.get("location")
     date = request.GET.get("date")
 
     return render(request, "stats.html", {"location": location, "date": date})
 
+
 def login_view(request):
-    if request.method == 'POST':
+    """
+    Handles the login view.
+
+    Parameters:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: The rendered login.html template with the login form.
+    """
+    if request.method == "POST":
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
             login(request, form.get_user())
-            return redirect('home')  # Adjust the redirect as necessary
+            return redirect("home")
     else:
         form = AuthenticationForm()
-    return render(request, 'login.html', {'form': form})
+    return render(request, "login.html", {"form": form})
+
 
 def logout_view(request):
+    """
+    Handles the logout view.
+
+    Parameters:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: Redirects to the login page.
+    """
     logout(request)
-    return redirect('login')  # Redirect to the login page
+    return redirect("login")
 
 
 def register_view(request):
-    if request.method == 'POST':
+    """
+    Handles the register view.
+
+    Parameters:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: The rendered register.html template with the registration form.
+    """
+    if request.method == "POST":
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            form.save()  # This saves the User model with the email
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
+            form.save()
+            username = form.cleaned_data.get("username")
+            raw_password = form.cleaned_data.get("password1")
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('home')  # Redirect to a home page
+            return redirect("home")  # Redirect to a home page
     else:
         form = CustomUserCreationForm()
-    return render(request, 'register.html', {'form': form})
-
-
-
+    return render(request, "register.html", {"form": form})
