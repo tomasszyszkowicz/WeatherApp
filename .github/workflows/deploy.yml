@@ -15,7 +15,6 @@ jobs:
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       run: |
-        heroku login --apikey $HEROKU_API_KEY
-        heroku container:login
+        echo ":$HEROKU_API_TOKEN" | docker login --username=_ --password-stdin registry.heroku.com
         heroku container:push web --app forecast-genius
         heroku container:release web --app forecast-genius
