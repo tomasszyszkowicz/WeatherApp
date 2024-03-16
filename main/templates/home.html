@@ -12,9 +12,9 @@
     <h1>Welcome to weather app</h1>
     <div class="top-right-container">
         <p><b>Logged in as:</b></p>
-        <p>{{ full_name }}</p>
-        <p>{{ user_email }}</p>
-        <a>Logout</a>
+        <p>{{ user.username }}</p>
+        <p>{{ user.email }}</p>
+        <a href="{% url 'logout' %}">Logout</a>
     </div>
     <div class="top-left-container">
         <p><b>Weather App</b></p>

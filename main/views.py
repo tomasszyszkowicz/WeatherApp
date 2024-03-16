@@ -10,7 +10,12 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 
+from .forms import CustomUserCreationForm
+
+
+@login_required
 def home_page(request):
     """
     Renders the home page.
@@ -23,7 +28,7 @@ def home_page(request):
     """
     return render(request, "home.html")
 
-
+@login_required
 def stats_page(request):
     """
     Renders the stats page.
@@ -56,16 +61,17 @@ def logout_view(request):
 
 def register_view(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            form.save()  # This saves the User model
+            form.save()  # This saves the User model with the email
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)  # Authenticate the user
-            login(request, user)  # Log the user in
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
             return redirect('home')  # Redirect to a home page
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
     return render(request, 'register.html', {'form': form})
+
 
 
