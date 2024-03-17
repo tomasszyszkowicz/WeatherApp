@@ -229,5 +229,60 @@ h1, .sub-heading {
 
 .day-container p {
     font-size: 12px; /* Override the font-size */
-    color: black; /* Override the color */
+    color: #000000; /* Override the color */
+}
+
+.login-container {
+    width: 300px;
+    padding: 20px;
+    margin: 100px auto;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.login-container h1 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.login-container input[type="text"], .login-container input[type="password"], .login-container input[type="email"]{
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.login-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.login-container button:hover {
+    background-color: #0056b3;
+}
+
+.login-container p {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.login-container p a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.login-container p a:hover {
+    text-decoration: underline;
 }
