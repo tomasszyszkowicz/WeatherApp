@@ -19,4 +19,4 @@ RUN python3 manage.py collectstatic --noinput
 EXPOSE 8000
 
 # Run Gunicorn to serve the Django application
-CMD ["gunicorn", "weather_app.wsgi:application", "--bind", "0.0.0.0:8000"]
+CMD ["sh", "-c", "gunicorn weather_app.wsgi:application --bind 0.0.0.0:$PORT"]
