@@ -55,6 +55,25 @@ You can do it by using a single command:
 pip install -r requirements.txt
 ```
 
+## Setup .env file
+
+Lastly, you need to setup the .env file. The variables are ready on heroku, however they are not ready for local development. That's why you need to setup the .env file to make the project work locally.
+
+Create the .env file inside the root of the project.
+
+Open it, and paste this into it:
+
+```plaintext
+DJANGO_SECRET_KEY=django_secret_value_value
+WEATHERSTACK_API_KEY=weatherstack_api_key_value
+PORT=8000
+DEBUG=True or False
+```
+
+Replace the values with the real values of these variables, you can find them here: https://github.com/tomasszyszkowicz/WeatherApp/settings/variables/actions
+
+Set the DEBUG to True for development. But if you want to test how the app will run in production, set the DEBUG to False.
+
 ## Run server
 
 To run the project locally on your localhost you can do this:
