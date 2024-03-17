@@ -3,7 +3,7 @@ name: Deploy to Heroku
 on:
   push:
     branches:
-      - heroku-setup  # Set this to your default bran
+      - master
 
 jobs:
   build:
@@ -15,7 +15,7 @@ jobs:
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       run: |
-        echo "d7c0c6e9-2036-40a5-9c18-be4ae0100efd" | docker login --username=_ --password-stdin registry.heroku.com
+        echo "$HEROKU_API_KEY" | docker login --username=_ --password-stdin registry.heroku.com
         heroku container:push web --app forecast-genius
         heroku container:release web --app forecast-genius
  
