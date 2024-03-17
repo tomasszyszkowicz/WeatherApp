@@ -1,6 +1,18 @@
 # Use Python 3.10.12 as the parent image
 FROM python:3.10.12-slim-buster
 
+# Use build arguments to pass sensitive data
+ARG DJANGO_SECRET_KEY
+ARG WEATHERSTACK_API_KEY
+ARG PORT
+ARG DEBUG
+
+# Set environment variables
+ENV DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY
+ENV WEATHERSTACK_API_KEY=$WEATHERSTACK_API_KEY
+ENV PORT=$PORT
+ENV DEBUG=$DEBUG
+
 # Set the working directory in the container
 WORKDIR /app
 
