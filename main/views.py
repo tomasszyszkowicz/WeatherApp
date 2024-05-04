@@ -92,3 +92,16 @@ def register_view(request):
     else:
         form = CustomUserCreationForm()
     return render(request, "register.html", {"form": form})
+
+
+def typescript_page(request):
+    """
+    Renders the TypeScript page.
+
+    Parameters:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: The rendered typescript.html template.
+    """
+    return render(request, "typescript.html")

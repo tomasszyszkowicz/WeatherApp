@@ -1,0 +1,163 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom, #b3e0ff, #004d99); /* Gradient from light blue to dark blue */
+    background-repeat: no-repeat; /* Prevent background from repeating */
+    background-size: 100% 100vh; /* Scale background image to cover the entire screen */
+}
+.left-container {
+    position: fixed;
+    top: 0;
+    left: -230px; /* Initially off-screen to the left */
+    height: 100vh; /* Extend from top to bottom of the viewport */
+    width: 300px; /* Adjust width as needed */
+    background-color: rgba(0, 0, 0, 0.8); /* Dark blue background with 80% opacity */
+    color: #ffffff; /* White text */
+    padding: 20px;
+    box-sizing: border-box; /* Include padding and border in width calculation */
+    transition: left 0.3s ease; /* Smooth transition effect */
+    padding-right: 70px;
+}
+
+/* User container */
+.user-container {
+    height: 200px; /* Set a fixed height for the user container */
+    text-align: center;
+}
+
+/* Favorite container */
+.favorite-container {
+    height: 200px; /* Set a fixed height for the favorite container */
+    text-align: center;
+}
+
+/* Recent container */
+.recent-container {
+    height: 400px; /* Set a fixed height for the recent container */
+    text-align: center;
+}
+
+
+.header-container {
+    width: 190px;
+    align-items: center; /* Center items vertically */
+    padding: 10px;
+    color: black;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.header-container h1 {
+    margin: 0; /* Remove default margin */
+}
+
+.header-container h3 {
+    margin: 0; /* Remove default margin */
+    flex: 1; /* Take up remaining space */
+}
+
+
+.left-container p {
+    font-size: 16px;
+    color: white; /* Example color */
+    margin: 20px 0; /* Example margin */
+    /* Add any other styles you'd like */
+}
+
+
+.left-container.visible {
+    left: 0; /* Move to the visible position */
+}
+
+/* Toggle button */
+.toggle-button {
+    position: absolute; /* Position the button absolutely within the container */
+    top: 48%; /* Align the button vertically in the middle */
+    right: 20px; /* Align the button 20px from the right edge */
+    transform: translateY(-50%); /* Center the button vertically */
+    background-color: black;
+    color: #ffffff; /* White text */
+    font-size: 40px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.toggle-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+
+
+.container {
+    max-width: 50%;
+    margin: 10px auto;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    color: #ffffff; /* White text */
+}
+
+.container h1 {
+    margin: 0;
+    color: inherit;
+}
+    
+h1 {
+    color: #333333; /* Dark gray text */
+}
+
+input[type="text"] {
+    width: 70%;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px auto;
+    border: 1px solid #cccccc; /* Light gray border */
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #4caf50; /* Green button */
+    color: #ffffff; /* White text */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+#weatherInfo {
+    margin-top: 20px;
+}
+
+a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+    border-radius: 5px; /* Blue link color */
+    text-decoration: none;
+}
+
+.nav-a {
+    display: inline-block;
+    padding: 10px 20px;
+    width: 170px;
+    margin-top: 10px;
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+/* Existing styles */
+
+
+
+
