@@ -105,7 +105,18 @@ class ForecastWeather:
             )
         )
         title_text = "Temperature in upcoming days in " + self.location
-        plot.update_layout(title=title_text, yaxis_title="Temperature (°C)")
+        plot.update_layout(
+            showlegend=False,
+            title=title_text,
+            yaxis_title="Temperature (°C)",
+            autosize=True,  # Make plot autosize
+            margin=dict(l=100, r=100, t=100, b=50),  # Set plot height
+            paper_bgcolor="rgb(25, 33, 48)",
+            font=dict(
+                color="white"  # Change the text color here
+            ),
+            # Other layout properties...
+        )
         plot_json = plot.to_json()
 
         return JsonResponse({"plot": plot_json})

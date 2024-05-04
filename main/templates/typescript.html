@@ -10,53 +10,85 @@
 </head>
 <body>
     <div class="container" style="margin-top: 50px;">
-        <h1>Forecast Genius</h1>
-    </div>
-    <div class="container">
         <input type="text" id="locationInput" placeholder="Enter city name">
         <button onclick="submitLocation()">Get Weather</button>
     </div>
     <div class="container">
-        <h2 id="locationHeader"></h2>
-        <p id="weatherDescription"></p>
-        <img id="weatherIcon">
-        <p id="temperature"></p>
-        <p id="humidity"></p>
-        <p id="windSpeed"></p>
-        <p id="localDate"></p>
-        <p id="localTime"></p>
+        <h2><span id="locationHeader"></span></h2>
+    </div>
+    <div class="double-container">
+        <div class="container-left">
+            <h1>Weather</h1>
+            <h2><span id="weatherDescription"></span></h2>
+            <img id="weatherIcon"><br>
+            <table>
+                <tr>
+                    <td>Temperature:</td>
+                    <td><span id="temperature"></span></td>
+                </tr>
+                <tr>
+                    <td>Humidity:</td>
+                    <td><span id="humidity"></span></td>
+                </tr>
+                <tr>
+                    <td>Wind speed:</td>
+                    <td><span id="windSpeed"></span></td>
+                </tr>
+                <tr>
+                    <td>Precipitation:</td>
+                    <td><span id="precipitation"></span></td>
+                </tr>
+                <tr>
+                    <td>Pressure:</td>
+                    <td><span id="pressure"></span></td>
+                </tr>
+                <tr>
+                    <td>UV Index:</td>
+                    <td><span id="uvIndex"></span></td>
+                </tr>
+            </table>
+        </div>
+        
+        <div class="container-right">
+            <h1>Location info</h1>
+            <table>
+                <tr>
+                    <td>Local date:</td>
+                    <td><span id="localDate"></span></td>
+                </tr>
+                <tr>
+                    <td>Local time:</td>
+                    <td><span id="localTime"></span></td>
+                </tr>
+            </table>
+        </div> 
+    </div>
+    <div class="plot-container" id="plot-container">
+        
     </div>
     <div id="navBar" class="left-container">
         <div class="user-container">
-            <div class="header-container">
-                <h3>Logged in as:</h3>
-            </div>
+            <h3>Logged in as:</h3>
             <p>{{ user.username }}</p>
             <p>{{ user.email }}</p>
             <a href="{% url 'logout' %}">Logout</a>
         </div>
         <div class="favorite-container">
-            <div class="header-container">
-                <h3>Favorite locations:</h3>
-            </div>
+            <h3>Favorite locations:</h3>
             <a class="nav-a" href="{% url 'home' %}">Home</a>
             <a class="nav-a" href="{% url 'stats' %}">Stats</a>
         </div>
         <div class="recent-container">
-            <div class="header-container">
-                <h3>Recent locations:</h3>
-            </div>
+            <h3>Recent locations:</h3>
             <p>Prague</p>
             <p>Brno</p>
             <p>Vienna</p>
         </div>
-        <button class="toggle-button" id="toggleButton"><b>⟩</b></button>
     </div>
-    
-
+    <button class="toggle-button" id="toggleButton"><b>⟩</b></button>
     <script src="{% static 'main/typescript.js' %}"></script>
-    <script src="{% static 'main/script.js' %}"></script>
     <script>
+        
         document.addEventListener('DOMContentLoaded', function () {
             const leftContainer = document.querySelector('.left-container');
             const toggleButton = document.getElementById('toggleButton');
@@ -68,12 +100,19 @@
                 if (isLeftContainerVisible) {
                     leftContainer.classList.remove('visible');
                     toggleButton.innerHTML = '<b>⟩</b>';
+                    toggleButton.classList.remove('visible');
                 } else {
                     leftContainer.classList.add('visible');
                     toggleButton.innerHTML = '<b>⟨</b>';
+                    toggleButton.classList.add('visible');
                 }
                 isLeftContainerVisible = !isLeftContainerVisible; // Toggle the visibility state
             });
+
+            getWeather();
+            getLocationInfo();
+            getForecastPlot();
+
         });
   
     </script>
