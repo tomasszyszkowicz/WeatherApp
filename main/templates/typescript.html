@@ -20,9 +20,10 @@
     </div>
     <div class="double-container">
         <div class="container-left">
-            <h1>Weather</h1>
+            <h1>Current weather</h1>
             <h2><span id="weatherDescription"></span></h2>
             <img id="weatherIcon"><br>
+            <h2>Temperature: <span id="temperature"></span></h2>
         </div>
         
         <div class="container-right">
@@ -36,10 +37,19 @@
                     <td>Local time:</td>
                     <td><span id="localTime"></span></td>
                 </tr>
+                <tr>
+                    <td>Timezone:</td>
+                    <td><span id="timezone"></span></td>
+                </tr>
+                <tr>
+                    <td>UTC offset:</td>
+                    <td><span id="utcOffset"></span></td>
+                </tr>
             </table>
         </div>
     </div>
-    <div class="container">
+    <div class="container" style="padding-top: 0px;">
+        <h1 style="margin-bottom: 20px;">Current weather metrics</h1>
         <table>
             <tr>
                 <td>Temperature:</td>
@@ -67,7 +77,18 @@
             </tr>
         </table>
     </div>
-    <div class="plot-container" id="plot-container">
+    <div class="double-container">
+        <div class="container-left">
+            <h1>Weather Forecast</h1>
+            <h2><span id="temperature"></span></h2>
+            <a class="nav-a">See full forecast</a>
+        </div>
+        
+        <div class="container-right">
+            <h1>Location info</h1>
+            <p>See full weather metrics for date</p>
+            <a class="nav-a" href="{% url 'stats' %}">Stats</a>
+        </div>
     </div>
         
     </div>
@@ -114,9 +135,10 @@
                 isLeftContainerVisible = !isLeftContainerVisible; // Toggle the visibility state
             });
 
-            getWeather();
-            getLocationInfo();
-            getForecastPlot();
+            getWeather("Ostrava");
+            getLocationInfo("Ostrava");
+            getForecastPlot("Ostrava");
+            getForecastData("Ostrava");
 
         });
 

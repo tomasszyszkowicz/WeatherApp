@@ -192,7 +192,8 @@ table {
     border-collapse: collapse;
     color: black;
     border: 3px solid black;
-    margin: 10px;
+    margin: 0 auto;
+    width: 80%;
 }
 
 thead th {
@@ -226,6 +227,7 @@ img {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
     color: #ffffff; /* White text */
+    margin-bottom: 60px;
 }
 
 

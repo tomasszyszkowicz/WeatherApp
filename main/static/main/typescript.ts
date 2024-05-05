@@ -31,6 +31,8 @@ class APICall {
                     this.displayLocationData(data);
                 } else if (this.endpoint === "forecast-plot") {
                     this.displayForecastPlot(data);
+                } else if (this.endpoint === "forecast-data") {
+                    console.log(data);
                 }
             });
     }
@@ -78,6 +80,8 @@ class APICall {
         const locationHeader2: HTMLElement | null = document.getElementById('locationHeader2');
         const localDate: HTMLElement | null = document.getElementById('localDate');
         const localTime: HTMLElement | null = document.getElementById('localTime');
+        const timezone: HTMLElement | null = document.getElementById('timezone');
+        const utcOffset: HTMLElement | null = document.getElementById('utcOffset');
 
         var fullLocation: string = data.name + ", " + data.region + ", " + data.country;
 
@@ -96,6 +100,19 @@ class APICall {
         if (localTime) {
             localTime.innerText = time;
         }
+
+        if (timezone) {
+            timezone.innerText = data.timezone_id;
+        }
+
+        if (utcOffset) {
+            utcOffset.innerText = data.utc_offset;
+        }
+
+    }
+
+    displayForecastData(data: ForecastData) {
+
     }
 
     displayForecastPlot(data: any) {
@@ -109,17 +126,19 @@ class APICall {
 }
 
 function getWeather(location: string): void {
-    new APICall("current", new Map([["location", "Ostrava"]]));
+    new APICall("current", new Map([["location", location]]));
 }
 
-function getLocationInfo(): void {
-    console.log("location");
-    new APICall("location-info", new Map([["location", "Ostrava"]]));
+function getLocationInfo(location: string): void {
+    new APICall("location-info", new Map([["location", location]]));
 }
 
-function getForecastPlot(): void {
-    console.log("forecast-plot");
-    new APICall("forecast-plot", new Map([["location", "Ostrava"]]));
+function getForecastPlot(location: string): void {
+    new APICall("forecast-plot", new Map([["location", location]]));
+}
+
+function getForecastData(location: string): void {
+    new APICall("forecast-data", new Map([["location", location]]));
 }
 
 interface CurrentWeatherData {
@@ -138,4 +157,11 @@ interface LocationData {
     country: string;
     region: string;
     localtime: string;
+    timezone_id: string;
+    utc_offset: string;
+}
+
+interface ForecastData {
+    temperatures: number[];
+    dates: string[];
 }

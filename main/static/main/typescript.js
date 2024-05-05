@@ -28,6 +28,9 @@ class APICall {
             else if (this.endpoint === "forecast-plot") {
                 this.displayForecastPlot(data);
             }
+            else if (this.endpoint === "forecast-data") {
+                console.log(data);
+            }
         });
     }
     displayCurrentData(data) {
@@ -71,6 +74,8 @@ class APICall {
         const locationHeader2 = document.getElementById('locationHeader2');
         const localDate = document.getElementById('localDate');
         const localTime = document.getElementById('localTime');
+        const timezone = document.getElementById('timezone');
+        const utcOffset = document.getElementById('utcOffset');
         var fullLocation = data.name + ", " + data.region + ", " + data.country;
         if (locationHeader) {
             locationHeader.innerText = fullLocation;
@@ -84,6 +89,14 @@ class APICall {
         if (localTime) {
             localTime.innerText = time;
         }
+        if (timezone) {
+            timezone.innerText = data.timezone_id;
+        }
+        if (utcOffset) {
+            utcOffset.innerText = data.utc_offset;
+        }
+    }
+    displayForecastData(data) {
     }
     displayForecastPlot(data) {
         var data = JSON.parse(data.plot);
@@ -96,13 +109,14 @@ class APICall {
 }
 APICall.url = '/data';
 function getWeather(location) {
-    new APICall("current", new Map([["location", "Ostrava"]]));
+    new APICall("current", new Map([["location", location]]));
 }
-function getLocationInfo() {
-    console.log("location");
-    new APICall("location-info", new Map([["location", "Ostrava"]]));
+function getLocationInfo(location) {
+    new APICall("location-info", new Map([["location", location]]));
 }
-function getForecastPlot() {
-    console.log("forecast-plot");
-    new APICall("forecast-plot", new Map([["location", "Ostrava"]]));
+function getForecastPlot(location) {
+    new APICall("forecast-plot", new Map([["location", location]]));
+}
+function getForecastData(location) {
+    new APICall("forecast-data", new Map([["location", location]]));
 }
