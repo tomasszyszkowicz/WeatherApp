@@ -95,8 +95,7 @@ class APICall {
     }
 }
 APICall.url = '/data';
-function getWeather() {
-    console.log("main");
+function getWeather(location) {
     new APICall("current", new Map([["location", "Ostrava"]]));
 }
 function getLocationInfo() {

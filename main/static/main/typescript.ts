@@ -108,8 +108,7 @@ class APICall {
     }
 }
 
-function getWeather(): void {
-    console.log("main");
+function getWeather(location: string): void {
     new APICall("current", new Map([["location", "Ostrava"]]));
 }
 
