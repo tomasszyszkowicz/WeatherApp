@@ -102,10 +102,9 @@ class APICall {
         var data = JSON.parse(data.plot);
         var layout = {
             autosize: true,
-            responzive: true,
-            aspectratio: { x: 4, y: 3 },
         };
-        (window as any).Plotly.newPlot('plot-container', data, layout);
+        var config = { responsive: true };
+        (window as any).Plotly.newPlot('plot-container', data, layout, config);
     }
 }
 

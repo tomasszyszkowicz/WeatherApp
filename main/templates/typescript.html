@@ -9,44 +9,20 @@
     <link rel="stylesheet" href="{% static 'main/newStyles.css' %}">
 </head>
 <body>
-    <div class="container" style="margin-top: 50px;">
+    <div class="container" style="margin-top: 50px; width: 40%;">
         <input type="text" id="locationInput" placeholder="Enter city name">
         <button onclick="submitLocation()">Get Weather</button>
     </div>
+    <div class="main-container">
     <div class="container">
         <h2><span id="locationHeader"></span></h2>
+        <hr>
     </div>
     <div class="double-container">
         <div class="container-left">
             <h1>Weather</h1>
             <h2><span id="weatherDescription"></span></h2>
             <img id="weatherIcon"><br>
-            <table>
-                <tr>
-                    <td>Temperature:</td>
-                    <td><span id="temperature"></span></td>
-                </tr>
-                <tr>
-                    <td>Humidity:</td>
-                    <td><span id="humidity"></span></td>
-                </tr>
-                <tr>
-                    <td>Wind speed:</td>
-                    <td><span id="windSpeed"></span></td>
-                </tr>
-                <tr>
-                    <td>Precipitation:</td>
-                    <td><span id="precipitation"></span></td>
-                </tr>
-                <tr>
-                    <td>Pressure:</td>
-                    <td><span id="pressure"></span></td>
-                </tr>
-                <tr>
-                    <td>UV Index:</td>
-                    <td><span id="uvIndex"></span></td>
-                </tr>
-            </table>
         </div>
         
         <div class="container-right">
@@ -61,9 +37,38 @@
                     <td><span id="localTime"></span></td>
                 </tr>
             </table>
-        </div> 
+        </div>
+    </div>
+    <div class="container">
+        <table>
+            <tr>
+                <td>Temperature:</td>
+                <td><span id="temperature"></span></td>
+            </tr>
+            <tr>
+                <td>Humidity:</td>
+                <td><span id="humidity"></span></td>
+            </tr>
+            <tr>
+                <td>Wind speed:</td>
+                <td><span id="windSpeed"></span></td>
+            </tr>
+            <tr>
+                <td>Precipitation:</td>
+                <td><span id="precipitation"></span></td>
+            </tr>
+            <tr>
+                <td>Pressure:</td>
+                <td><span id="pressure"></span></td>
+            </tr>
+            <tr>
+                <td>UV Index:</td>
+                <td><span id="uvIndex"></span></td>
+            </tr>
+        </table>
     </div>
     <div class="plot-container" id="plot-container">
+    </div>
         
     </div>
     <div id="navBar" class="left-container">
@@ -114,6 +119,15 @@
             getForecastPlot();
 
         });
+
+        function submitLocation() {
+            const locationInput = document.getElementById('locationInput');
+            const location = locationInput.value;
+            console.log('Location:', location);
+            getWeather(location);
+            getLocationInfo(location);
+            getForecastPlot(location);
+        }
   
     </script>
 </body>
