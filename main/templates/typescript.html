@@ -23,7 +23,7 @@
             <h1>Current weather</h1>
             <h2><span id="weatherDescription"></span></h2>
             <img id="weatherIcon"><br>
-            <h2>Temperature: <span id="temperature"></span></h2>
+            <h2>Temperature: <span id="headerTemperature"></span></h2>
         </div>
         
         <div class="container-right">
@@ -80,7 +80,8 @@
     <div class="double-container">
         <div class="container-left">
             <h1>Weather Forecast</h1>
-            <h2><span id="temperature"></span></h2>
+            <h3><span id="day2"></span>: <span id="temperature2"></span></h3>
+            <h3><span id="day3"></span>: <span id="temperature3"></span></h3>
             <a class="nav-a">See full forecast</a>
         </div>
         
@@ -149,6 +150,7 @@
             getWeather(location);
             getLocationInfo(location);
             getForecastPlot(location);
+            getForecastData(location);
         }
   
     </script>

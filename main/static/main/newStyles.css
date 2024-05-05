@@ -9,7 +9,7 @@ body {
 .left-container {
     position: fixed;
     top: 0;
-    left: -230px; /* Initially off-screen to the left */
+    left: -260px; /* Initially off-screen to the left */
     height: 100vh; /* Extend from top to bottom of the viewport */
     width: 300px; /* Adjust width as needed */
     background-color: rgba(0, 0, 0, 0.8); /* Dark blue background with 80% opacity */
@@ -25,6 +25,8 @@ body {
     background-color: white;
     border-radius: 5px;
     margin-bottom: 10px; /* Add margin to separate from other elements */
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 /* User container */
@@ -60,9 +62,9 @@ body {
 
 /* Toggle button */
 .toggle-button {
-    position: absolute; /* Position the button absolutely within the container */
+    position: fixed; /* Position the button absolutely within the container */
     top: 48%; /* Align the button vertically in the middle */
-    left: 20px; /* Align the button 20px from the right edge */
+    left: 50px; /* Align the button 20px from the right edge */
     transform: translateY(-50%); /* Center the button vertically */
     background-color: black;
     color: #ffffff; /* White text */

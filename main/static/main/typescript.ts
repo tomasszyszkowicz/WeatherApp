@@ -32,7 +32,7 @@ class APICall {
                 } else if (this.endpoint === "forecast-plot") {
                     this.displayForecastPlot(data);
                 } else if (this.endpoint === "forecast-data") {
-                    console.log(data);
+                    this.displayForecastData(data);
                 }
             });
     }
@@ -45,6 +45,10 @@ class APICall {
         const temperature: HTMLElement | null = document.getElementById("temperature");
         if (temperature) {
             temperature.innerText = data.temperature + "°C";
+        }
+        const headerTemperature: HTMLElement | null = document.getElementById("headerTemperature");
+        if (headerTemperature) {
+            headerTemperature.innerText = data.temperature + "°C";
         }
         const humidity: HTMLElement | null = document.getElementById("humidity");
         if (humidity) {
@@ -112,7 +116,26 @@ class APICall {
     }
 
     displayForecastData(data: ForecastData) {
+        const day2: HTMLElement | null = document.getElementById('day2');
+        const day3: HTMLElement | null = document.getElementById('day3');
 
+        const temperature2: HTMLElement | null = document.getElementById('temperature2');
+        const temperature3: HTMLElement | null = document.getElementById('temperature3');
+        if (day2) {
+            day2.innerText = data.dates[1];
+        }
+
+        if (day3) {
+            day3.innerText = data.dates[2];
+        }
+
+        if (temperature2) {
+            temperature2.innerText = data.temperatures[1] + "°C";
+        }
+
+        if (temperature3) {
+            temperature3.innerText = data.temperatures[2] + "°C";
+        }
     }
 
     displayForecastPlot(data: any) {
