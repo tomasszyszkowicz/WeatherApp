@@ -87,59 +87,13 @@
         </div>
     </div>
     <button class="toggle-button" id="toggleButton"><b>⟩</b></button>
+    <script src="{% static 'main/utilities.js' %}"></script>
+    <script src="{% static 'main/forecast.js' %}"></script>
     <script src="{% static 'main/typescript.js' %}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', async function () {
-            var location = getQueryParamater('location');
-            document.getElementById('locationHeader').textContent = getQueryParamater('location');
-                    const leftContainer = document.querySelector('.left-container');
-                    const toggleButton = document.getElementById('toggleButton');
-
-                    let isLeftContainerVisible = false; // Initially hidden
-
-                    toggleButton.addEventListener('click', function () {
-                        console.log('Button clicked');
-                        if (isLeftContainerVisible) {
-                            leftContainer.classList.remove('visible');
-                            toggleButton.innerHTML = '<b>⟩</b>';
-                            toggleButton.classList.remove('visible');
-                        } else {
-                            leftContainer.classList.add('visible');
-                            toggleButton.innerHTML = '<b>⟨</b>';
-                            toggleButton.classList.add('visible');
-                        }
-                        isLeftContainerVisible = !isLeftContainerVisible; // Toggle the visibility state
-                    });
-                    setTimeout(function() {
-                        const leftContainer = document.querySelector('.left-container');
-                        leftContainer.classList.add('visible');
-                        toggleButton.innerHTML = '<b>⟨</b>';
-                        toggleButton.classList.add('visible');
-                        isLeftContainerVisible = true;
-                    }, 10);
-
-                    const username = document.getElementById('username').textContent;
-                    await Promise.all([
-                        getAllData(location, username),
-                    ]);
-
-                    document.querySelector('.main-container').style.display = 'block';
-                    document.querySelector('.loader-container').style.display = 'none';
+            setupPage();
         });
-
-        function getQueryParamater(name) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(name);
-        }
-
-        function getCookie(name) {
-            const value = `; ${document.cookie}`;
-            const parts = value.split(`; ${name}=`);
-            if (parts.length === 2) return parts.pop().split(';').shift() || null;
-            return null;
-        }
-
-  
     </script>
 </body>
 </html>
