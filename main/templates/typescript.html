@@ -15,7 +15,7 @@
     </div>
     <div class="main-container" style="margin-bottom: 50px;">
     <div class="container">
-        <h2><span id="locationHeader"></span></h2>
+        <h1><span id="locationHeader"></span></h1>
         <hr>
     </div>
     <div class="double-container">
@@ -149,6 +149,13 @@
             getForecastData("Ostrava");
             getFavoriteLocations(username);
             getRecentLocations(username);
+
+            setTimeout(function() {
+                const leftContainer = document.querySelector('.left-container');
+                leftContainer.classList.add('visible');
+                toggleButton.innerHTML = '<b>⟨</b>';
+                toggleButton.classList.add('visible');
+            }, 500);
         });
 
         function submitLocation() {

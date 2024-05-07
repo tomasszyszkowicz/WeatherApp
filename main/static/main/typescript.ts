@@ -127,6 +127,14 @@ class APICall {
         const day6: HTMLElement | null = document.getElementById('day6');
         const day7: HTMLElement | null = document.getElementById('day7');
 
+        const icon1: HTMLImageElement | null = document.getElementById('icon1') as HTMLImageElement;
+        const icon2: HTMLImageElement | null = document.getElementById('icon2') as HTMLImageElement;
+        const icon3: HTMLImageElement | null = document.getElementById('icon3') as HTMLImageElement;
+        const icon4: HTMLImageElement | null = document.getElementById('icon4') as HTMLImageElement;
+        const icon5: HTMLImageElement | null = document.getElementById('icon5') as HTMLImageElement;
+        const icon6: HTMLImageElement | null = document.getElementById('icon6') as HTMLImageElement;
+        const icon7: HTMLImageElement | null = document.getElementById('icon7') as HTMLImageElement;
+
         const temperature1: HTMLElement | null = document.getElementById('temperature1');
         const temperature2: HTMLElement | null = document.getElementById('temperature2');
         const temperature3: HTMLElement | null = document.getElementById('temperature3');
@@ -136,25 +144,47 @@ class APICall {
         const temperature7: HTMLElement | null = document.getElementById('temperature7');
 
         if (day1) {
-            day1.innerText = data.dates[0];
+            day1.innerText = getDayName(data.dates[0]);
         }
         if (day2) {
-            day2.innerText = data.dates[1];
+            day2.innerText = getDayName(data.dates[1]);
         }
         if (day3) {
-            day3.innerText = data.dates[2];
+            day3.innerText = getDayName(data.dates[2]);
         }
         if (day4) {
-            day4.innerText = data.dates[3];
+            day4.innerText = getDayName(data.dates[3]);
         }
         if (day5) {
-            day5.innerText = data.dates[4];
+            day5.innerText = getDayName(data.dates[4]);
         }
         if (day6) {
-            day6.innerText = data.dates[5];
+            day6.innerText = getDayName(data.dates[5]);
         }
         if (day7) {
-            day7.innerText = data.dates[6];
+            day7.innerText = getDayName(data.dates[6]);
+        }
+
+        if (icon1) {
+            icon1.src = data.weather_icons[0];
+        }
+        if (icon2) {
+            icon2.src = data.weather_icons[1];
+        }
+        if (icon3) {
+            icon3.src = data.weather_icons[2];
+        }
+        if (icon4) {
+            icon4.src = data.weather_icons[3];
+        }
+        if (icon5) {
+            icon5.src = data.weather_icons[4];
+        }
+        if (icon6) {
+            icon6.src = data.weather_icons[5];
+        }
+        if (icon7) {
+            icon7.src = data.weather_icons[6];
         }
 
         if (temperature1) {
@@ -267,6 +297,13 @@ function getRecentLocations(username: string): void {
     new APICall("", "recent-locations", new Map([["username", username]]));
 }
 
+function getDayName(dateString: string): string {
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const date = new Date(dateString);
+    const dayIndex = date.getDay();
+    return days[dayIndex];
+}
+
 interface CurrentWeatherData {
     weather_descriptions: string[];
     temperature: number;
@@ -289,6 +326,7 @@ interface LocationData {
 
 interface ForecastData {
     temperatures: number[];
+    weather_icons: string[];
     dates: string[];
 }
 

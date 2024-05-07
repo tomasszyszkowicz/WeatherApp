@@ -257,6 +257,11 @@ img {
     border: solid 2px white;
 }
 
+.img-day {
+    height: auto;
+    border: solid 2px black;
+}
+
 .main-container {
     max-width: 40%;
     margin: 10px auto;
