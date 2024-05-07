@@ -101,17 +101,17 @@ def register_view(request):
 
 
 @login_required
-def typescript_page(request):
+def current_page(request):
     """
-    Renders the TypeScript page.
+    Renders the current page.
 
     Parameters:
         request (HttpRequest): The HTTP request object.
 
     Returns:
-        HttpResponse: The rendered typescript.html template.
+        HttpResponse: The rendered current.html template.
     """
-    return render(request, "typescript.html")
+    return render(request, "current.html")
 
 
 def forecast_page(request):
