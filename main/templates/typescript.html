@@ -95,16 +95,18 @@
     </div>
     <div id="navBar" class="left-container">
         <div class="user-container">
+            <h2>FORECAST GENIUS</h2>
             <h3>Logged in as:</h3>
             <p id="username">{{ user.username }}</p>
             <p>{{ user.email }}</p>
-            <a href="{% url 'logout' %}">Logout</a>
+            <a class="logout-a" href="{% url 'logout' %}">Logout</a>
         </div>
         <div class="favorite-container">
             <h3>Favorite locations:</h3>
             <a class="nav-a"><span id="favoriteLocation1"></span></a>
             <a class="nav-a"><span id="favoriteLocation2"></span></a>
             <a class="nav-a"><span id="favoriteLocation3"></span></a>
+            <a class="edit-a">Edit</a>
         </div>
         <div class="recent-container">
             <h3>Recent locations:</h3>
@@ -141,17 +143,11 @@
             });
 
             const username = document.getElementById('username').textContent;
-            const locationData = {
-                location1: 'New Location 1',
-                location2: 'New Location 2',
-                location3: 'New Location 3'
-            };
-            updateFavoriteLocations(username, locationData);
             getWeather("Ostrava");
             getLocationInfo("Ostrava");
             getForecastPlot("Ostrava");
             getForecastData("Ostrava");
-            getFavoriteLocations("tomas");
+            getFavoriteLocations(username);
             getRecentLocations(username);
         });
 

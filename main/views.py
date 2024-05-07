@@ -100,6 +100,7 @@ def register_view(request):
     return render(request, "register.html", {"form": form})
 
 
+@login_required
 def typescript_page(request):
     """
     Renders the TypeScript page.
