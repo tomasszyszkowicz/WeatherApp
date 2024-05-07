@@ -226,28 +226,23 @@ a {
 /* Existing styles */
 
 table {
+    background-color: rgb(25, 33, 48);
     border-collapse: collapse;
-    color: black;
-    border: 3px solid black;
+    color: white;
+    border: 3px solid white;
     margin: 0 auto;
     width: 80%;
 }
 
 thead th {
-    background-color: #f2f2f2;
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
 }
 
-tbody tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
 tbody td {
-    border: 1px solid #dddddd;
     padding: 8px;
-    background-color: white;
+    border: 1px solid white;
 }
 
 img {

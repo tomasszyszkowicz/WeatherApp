@@ -125,7 +125,7 @@ class ForecastWeather:
             showlegend=False,
             yaxis_title="Temperature (°C)",
             autosize=True,  # Make plot autosize
-            margin=dict(l=100, r=100, t=20, b=50),  # Set plot height
+            margin=dict(l=100, r=50, t=20, b=50),  # Set plot height
             plot_bgcolor="rgb(25, 33, 48)",
             paper_bgcolor="rgb(25, 33, 48)",
             font=dict(

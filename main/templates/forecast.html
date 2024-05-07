@@ -110,10 +110,17 @@
                         }
                         isLeftContainerVisible = !isLeftContainerVisible; // Toggle the visibility state
                     });
+                    setTimeout(function() {
+                        const leftContainer = document.querySelector('.left-container');
+                        leftContainer.classList.add('visible');
+                        toggleButton.innerHTML = '<b>⟨</b>';
+                        toggleButton.classList.add('visible');
+                        isLeftContainerVisible = true;
+                    }, 10);
 
                     const username = document.getElementById('username').textContent;
                     await Promise.all([
-                        getAllData("Ostrava", username),
+                        getAllData(location, username),
                     ]);
 
                     document.querySelector('.main-container').style.display = 'block';
