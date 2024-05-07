@@ -1,13 +1,14 @@
 "use strict";
 class APICall {
-    constructor(endpoint, params) {
+    constructor(url, endpoint, params) {
+        this.url = url;
         this.endpoint = endpoint;
         this.params = params;
         this.getCall();
     }
     getCall() {
         //add params to url
-        let url = APICall.url + '/' + this.endpoint + '?';
+        let url = this.url + '/' + this.endpoint + '?';
         this.params.forEach((value, key) => {
             url += key + '=' + value + '&';
         });
@@ -18,7 +19,6 @@ class APICall {
         fetch(url)
             .then(response => response.json())
             .then(data => {
-            console.log(data);
             if (this.endpoint === "current") {
                 this.displayCurrentData(data);
             }
@@ -30,6 +30,12 @@ class APICall {
             }
             else if (this.endpoint === "forecast-data") {
                 this.displayForecastData(data);
+            }
+            else if (this.endpoint === "favorite-locations") {
+                this.displayFavoriteLocations(data);
+            }
+            else if (this.endpoint === "recent-locations") {
+                this.displayRecentLocations(data);
             }
         });
     }
@@ -126,17 +132,67 @@ class APICall {
         var config = { responsive: true };
         window.Plotly.newPlot('plot-container', data, layout, config);
     }
+    displayFavoriteLocations(data) {
+        console.log(data);
+        console.log("ahoj");
+        const location1 = document.getElementById('favoriteLocation1');
+        const location2 = document.getElementById('favoriteLocation2');
+        const location3 = document.getElementById('favoriteLocation3');
+        if (location1) {
+            console.log("ahoj");
+            location1.innerText = data.location1;
+        }
+        if (location2) {
+            location2.innerText = data.location2;
+        }
+        if (location3) {
+            location3.innerText = data.location3;
+        }
+    }
+    displayRecentLocations(data) {
+        console.log("recentiryyyyy!!!!");
+        console.log(data);
+        const location1 = document.getElementById('recentLocation1');
+        const location2 = document.getElementById('recentLocation2');
+        const location3 = document.getElementById('recentLocation3');
+        const location4 = document.getElementById('recentLocation4');
+        const location5 = document.getElementById('recentLocation5');
+        const location6 = document.getElementById('recentLocation6');
+        if (location1) {
+            location1.innerText = data.location1;
+        }
+        if (location2) {
+            location2.innerText = data.location2;
+        }
+        if (location3) {
+            location3.innerText = data.location3;
+        }
+        if (location4) {
+            location4.innerText = data.location4;
+        }
+        if (location5) {
+            location5.innerText = data.location5;
+        }
+        if (location6) {
+            location6.innerText = data.location6;
+        }
+    }
 }
-APICall.url = '/data';
 function getWeather(location) {
-    new APICall("current", new Map([["location", location]]));
+    new APICall("/data", "current", new Map([["location", location]]));
 }
 function getLocationInfo(location) {
-    new APICall("location-info", new Map([["location", location]]));
+    new APICall("/data", "location-info", new Map([["location", location]]));
 }
 function getForecastPlot(location) {
-    new APICall("forecast-plot", new Map([["location", location]]));
+    new APICall("/data", "forecast-plot", new Map([["location", location]]));
 }
 function getForecastData(location) {
-    new APICall("forecast-data", new Map([["location", location]]));
+    new APICall("/data", "forecast-data", new Map([["location", location]]));
+}
+function getFavoriteLocations(username) {
+    new APICall("", "favorite-locations", new Map([["username", username]]));
+}
+function getRecentLocations(username) {
+    new APICall("", "recent-locations", new Map([["username", username]]));
 }

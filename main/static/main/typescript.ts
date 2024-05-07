@@ -1,11 +1,11 @@
 class APICall {
 
-    private static url: string = '/data';
-   
+    private url: string;
     private endpoint: string;
     private params: Map<string, string>;
 
-    constructor(endpoint: string, params: Map<string, string>) {
+    constructor(url: string, endpoint: string, params: Map<string, string>) {
+        this.url = url;
         this.endpoint = endpoint;
         this.params = params;
         this.getCall();
@@ -13,7 +13,7 @@ class APICall {
 
     getCall() {
         //add params to url
-        let url: string = APICall.url + '/' + this.endpoint + '?';
+        let url: string = this.url + '/' + this.endpoint + '?';
         this.params.forEach((value, key) => {
             url += key + '=' + value + '&';
         });
@@ -24,7 +24,6 @@ class APICall {
         fetch(url)
             .then(response => response.json())
             .then(data => {
-                console.log(data);
                 if (this.endpoint === "current") {
                     this.displayCurrentData(data);
                 } else if (this.endpoint === "location-info") {
@@ -33,6 +32,10 @@ class APICall {
                     this.displayForecastPlot(data);
                 } else if (this.endpoint === "forecast-data") {
                     this.displayForecastData(data);
+                } else if (this.endpoint === "favorite-locations") {
+                    this.displayFavoriteLocations(data);
+                } else if (this.endpoint === "recent-locations") {
+                    this.displayRecentLocations(data);
                 }
             });
     }
@@ -146,22 +149,80 @@ class APICall {
         var config = { responsive: true };
         (window as any).Plotly.newPlot('plot-container', data, layout, config);
     }
+
+    displayFavoriteLocations(data: FavoriteLocation) {
+        console.log(data);
+        console.log("ahoj");
+        const location1: HTMLElement | null = document.getElementById('favoriteLocation1');
+        const location2: HTMLElement | null = document.getElementById('favoriteLocation2');
+        const location3: HTMLElement | null = document.getElementById('favoriteLocation3');
+
+        if (location1) {
+            console.log("ahoj");
+            location1.innerText = data.location1;
+        }
+        if (location2) {
+            location2.innerText = data.location2;
+        }
+        if (location3) {
+            location3.innerText = data.location3;
+        }
+        
+    }
+
+    displayRecentLocations(data: RecentLocation) {
+        console.log("recentiryyyyy!!!!");
+        console.log(data);
+        const location1: HTMLElement | null = document.getElementById('recentLocation1');
+        const location2: HTMLElement | null = document.getElementById('recentLocation2');
+        const location3: HTMLElement | null = document.getElementById('recentLocation3');
+        const location4: HTMLElement | null = document.getElementById('recentLocation4');
+        const location5: HTMLElement | null = document.getElementById('recentLocation5');
+        const location6: HTMLElement | null = document.getElementById('recentLocation6');
+
+        if (location1) {
+            location1.innerText = data.location1;
+        }
+        if (location2) {
+            location2.innerText = data.location2;
+        }
+        if (location3) {
+            location3.innerText = data.location3;
+        }
+        if (location4) {
+            location4.innerText = data.location4;
+        }
+        if (location5) {
+            location5.innerText = data.location5;
+        }
+        if (location6) {
+            location6.innerText = data.location6;
+        }
+    }
 }
 
 function getWeather(location: string): void {
-    new APICall("current", new Map([["location", location]]));
+    new APICall("/data", "current", new Map([["location", location]]));
 }
 
 function getLocationInfo(location: string): void {
-    new APICall("location-info", new Map([["location", location]]));
+    new APICall("/data", "location-info", new Map([["location", location]]));
 }
 
 function getForecastPlot(location: string): void {
-    new APICall("forecast-plot", new Map([["location", location]]));
+    new APICall("/data", "forecast-plot", new Map([["location", location]]));
 }
 
 function getForecastData(location: string): void {
-    new APICall("forecast-data", new Map([["location", location]]));
+    new APICall("/data", "forecast-data", new Map([["location", location]]));
+}
+
+function getFavoriteLocations(username: string): void {
+    new APICall("", "favorite-locations", new Map([["username", username]]));
+}
+
+function getRecentLocations(username: string): void {
+    new APICall("", "recent-locations", new Map([["username", username]]));
 }
 
 interface CurrentWeatherData {
@@ -187,4 +248,19 @@ interface LocationData {
 interface ForecastData {
     temperatures: number[];
     dates: string[];
+}
+
+interface FavoriteLocation {
+    location1: string;
+    location2: string;
+    location3: string;
+}
+
+interface RecentLocation {
+    location1: string;
+    location2: string;
+    location3: string;
+    location4: string;
+    location5: string;
+    location6: string;
 }

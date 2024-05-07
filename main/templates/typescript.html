@@ -96,20 +96,24 @@
     <div id="navBar" class="left-container">
         <div class="user-container">
             <h3>Logged in as:</h3>
-            <p>{{ user.username }}</p>
+            <p id="username">{{ user.username }}</p>
             <p>{{ user.email }}</p>
             <a href="{% url 'logout' %}">Logout</a>
         </div>
         <div class="favorite-container">
             <h3>Favorite locations:</h3>
-            <a class="nav-a" href="{% url 'home' %}">Home</a>
-            <a class="nav-a" href="{% url 'stats' %}">Stats</a>
+            <a class="nav-a"><span id="favoriteLocation1"></span></a>
+            <a class="nav-a"><span id="favoriteLocation2"></span></a>
+            <a class="nav-a"><span id="favoriteLocation3"></span></a>
         </div>
         <div class="recent-container">
             <h3>Recent locations:</h3>
-            <p>Prague</p>
-            <p>Brno</p>
-            <p>Vienna</p>
+            <a class="nav-a"><span id="recentLocation1"></span></a>
+            <a class="nav-a"><span id="recentLocation2"></span></a>
+            <a class="nav-a"><span id="recentLocation3"></span></a>
+            <a class="nav-a"><span id="recentLocation4"></span></a>
+            <a class="nav-a"><span id="recentLocation5"></span></a>
+            <a class="nav-a"><span id="recentLocation6"></span></a>
         </div>
     </div>
     <button class="toggle-button" id="toggleButton"><b>⟩</b></button>
@@ -136,11 +140,19 @@
                 isLeftContainerVisible = !isLeftContainerVisible; // Toggle the visibility state
             });
 
+            const username = document.getElementById('username').textContent;
+            const locationData = {
+                location1: 'New Location 1',
+                location2: 'New Location 2',
+                location3: 'New Location 3'
+            };
+            updateFavoriteLocations(username, locationData);
             getWeather("Ostrava");
             getLocationInfo("Ostrava");
             getForecastPlot("Ostrava");
             getForecastData("Ostrava");
-
+            getFavoriteLocations("tomas");
+            getRecentLocations(username);
         });
 
         function submitLocation() {
@@ -151,7 +163,83 @@
             getLocationInfo(location);
             getForecastPlot(location);
             getForecastData(location);
+            updateRecentLocations(location);
         }
+
+        function updateRecentLocations(location) {
+            const username = document.getElementById('username').textContent;
+            const url = `/update-recent-locations/${username}/`;
+
+            // Define the POST request options
+            const options = {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken')// Make sure to replace 'csrftoken' with the name of your CSRF token cookie
+                },
+                body: JSON.stringify({'location': location }) // Convert location to JSON string
+            };
+
+            // Make the POST request using fetch
+            fetch(url, options)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to update recent locations');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data);
+                    getRecentLocations(username);
+                })
+                .catch(error => {
+                    console.error('Error:', error); // Log any errors
+                    // Handle error
+                });
+
+
+        }
+
+        function updateFavoriteLocations(username, locationData) {
+            // Define the endpoint URL
+            const url = `/update-favorite-locations/${username}/`;
+            console.log(locationData);
+
+            // Define the PATCH request options
+            const options = {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken') // Make sure to replace 'csrftoken' with the name of your CSRF token cookie
+                },
+                body: JSON.stringify(locationData) // Convert locationData to JSON string
+            };
+
+            // Make the PATCH request using fetch
+            fetch(url, options)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to update favorite locations');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data); // Log the response data
+                    // Handle successful response
+                })
+                .catch(error => {
+                    console.error('Error:', error); // Log any errors
+                    // Handle error
+                });
+        }
+
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift() || null;
+            return null;
+        }
+
   
     </script>
 </body>
