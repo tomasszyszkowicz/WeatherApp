@@ -1,9 +1,135 @@
+{% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Weather Forecast</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forecast Genius</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link rel="stylesheet" href="{% static 'main/newStyles.css' %}">
 </head>
-<body>
-    <h1>This is forecast</h1>
+<body style="height: 100vh;">
+    <div class="main-container" style="margin-top: 50px;">
+        <div class="container">
+            <h2><span id="locationHeader"></span></h2>
+            <hr>
+        </div>  
+        <div class="container" style="margin-bottom: 0px;">
+            <h1 style="margin-bottom: 0px;">Weather Forecast</h1>
+        </div>
+        <div id="plot-container" class="plot-container" style="margin-top: 0px; padding-top: 0px;">
+        </div>
+        <div class="forecast-container">
+            <div class="day-container" style="margin-left: 0px;">
+                <p><span id="day1"></span></p>
+                <p><span id="temperature1"></span>
+            </div>
+            <div class="day-container">
+                <p><span id="day2"></span></p>
+                <p><span id="temperature2"></span>
+            </div>
+            <div class="day-container">
+                <p><span id="day3"></span></p>
+                <p><span id="temperature3"></span>
+            </div>
+            <div class="day-container">
+                <p><span id="day4"></span></p>
+                <p><span id="temperature4"></span>
+            </div>
+            <div class="day-container">
+                <p><span id="day5"></span></p>
+                <p><span id="temperature5"></span>
+            </div>
+            <div class="day-container">
+                <p><span id="day6"></span></p>
+                <p><span id="temperature6"></span>
+            </div>
+            <div class="day-container" style="margin-right: 0px;">
+                <p><span id="day7"></span></p>
+                <p><span id="temperature7"></span>
+            </div>
+        </div>
+        <p>Click on specific day to see full weather metrics</p>
+    </div>
+    <div id="navBar" class="left-container">
+        <div class="user-container">
+            <h2 style="margin-bottom: 30px;">FORECAST GENIUS</h2>
+            <h3>Logged in as:</h3>
+            <p id="username">{{ user.username }}</p>
+            <p>{{ user.email }}</p>
+            <a class="logout-a" href="{% url 'logout' %}">Logout</a>
+        </div>
+        <div class="favorite-container">
+            <h3>Favorite locations:</h3>
+            <a class="nav-a"><span id="favoriteLocation1"></span></a>
+            <a class="nav-a"><span id="favoriteLocation2"></span></a>
+            <a class="nav-a"><span id="favoriteLocation3"></span></a>
+            <a class="edit-a">Edit</a>
+        </div>
+        <div class="recent-container">
+            <h3>Recent locations:</h3>
+            <a class="nav-a"><span id="recentLocation1"></span></a>
+            <a class="nav-a"><span id="recentLocation2"></span></a>
+            <a class="nav-a"><span id="recentLocation3"></span></a>
+            <a class="nav-a"><span id="recentLocation4"></span></a>
+            <a class="nav-a"><span id="recentLocation5"></span></a>
+            <a class="nav-a"><span id="recentLocation6"></span></a>
+        </div>
+    </div>
+    <button class="toggle-button" id="toggleButton"><b>⟩</b></button>
+    <script src="{% static 'main/typescript.js' %}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var location = getQueryParamater('location');
+            document.getElementById('locationHeader').textContent = getQueryParamater('location');
+                    const leftContainer = document.querySelector('.left-container');
+                    const toggleButton = document.getElementById('toggleButton');
+
+                    let isLeftContainerVisible = false; // Initially hidden
+
+                    toggleButton.addEventListener('click', function () {
+                        console.log('Button clicked');
+                        if (isLeftContainerVisible) {
+                            leftContainer.classList.remove('visible');
+                            toggleButton.innerHTML = '<b>⟩</b>';
+                            toggleButton.classList.remove('visible');
+                        } else {
+                            leftContainer.classList.add('visible');
+                            toggleButton.innerHTML = '<b>⟨</b>';
+                            toggleButton.classList.add('visible');
+                        }
+                        isLeftContainerVisible = !isLeftContainerVisible; // Toggle the visibility state
+                    });
+
+                    const username = document.getElementById('username').textContent;
+                    getFavoriteLocations(username);
+                    getRecentLocations(username);
+                    getForecastPlot(location);
+                    getForecastData(location);
+
+            setTimeout(function() {
+                const leftContainer = document.querySelector('.left-container');
+                leftContainer.classList.add('visible');
+                isLeftContainerVisible = true;
+                const toggleButton = document.getElementById('toggleButton');
+                toggleButton.innerHTML = '<b>⟨</b>';
+                toggleButton.classList.add('visible');
+            }, 500);
+        });
+
+        function getQueryParamater(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift() || null;
+            return null;
+        }
+
+  
+    </script>
 </body>
 </html>

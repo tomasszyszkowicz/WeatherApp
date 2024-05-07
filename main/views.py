@@ -114,6 +114,19 @@ def typescript_page(request):
     return render(request, "typescript.html")
 
 
+def forecast_page(request):
+    """
+    Renders the forecast page.
+
+    Parameters:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: The rendered forecast.html template.
+    """
+    return render(request, "forecast.html")
+
+
 def all_users_view(request):
     # Get all users from the database
     users = User.objects.all()

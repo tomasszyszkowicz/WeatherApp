@@ -4,7 +4,8 @@ body {
     padding: 0;
     background: linear-gradient(to bottom, #b3e0ff, #004d99); /* Gradient from light blue to dark blue */
     background-repeat: no-repeat; /* Prevent background from repeating */
-    background-size: 100% 100%; /* Scale background image to cover the entire screen */
+    background-size: cover; /* Scale background image to cover the entire screen */
+    height: 100%;
 }
 .left-container {
     position: fixed;
@@ -37,7 +38,7 @@ body {
 
 /* User container */
 .user-container {
-    height: 240px; /* Set a fixed height for the user container */
+    height: 250px; /* Set a fixed height for the user container */
     text-align: center;
 }
 
@@ -113,6 +114,16 @@ body {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+}
+
+.forecast-container {
+    padding: 0px;
+    max-width: 100%;
+    margin: 10px auto;
+    font-size: 14px;
+    position: relative;
+    display: flex; /* Use flexbox to place items next to each other */
+    justify-content: space-between; /* Add space between items */
 }
 
 .plot-container {
@@ -211,6 +222,7 @@ a {
     color: white;
     border-radius: 5px;
     text-decoration: none;
+    cursor: pointer;
 }
 
 /* Existing styles */
@@ -254,7 +266,35 @@ img {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
     color: #ffffff; /* White text */
-    margin-bottom: 60px;
+}
+.main-container.visible {
+    right: 50%; /* Move to the visible position */
 }
 
+.day-container {
+    background-color: #ffffff;
+    padding: 10px;
+    width: calc(100% / 7 - 20px); /* Divide the width equally among 7 containers and adjust for margin */
+    font-size: 7px;
+    position: relative;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    margin: 5px;
+    margin-top: 0px;
+    transition: background-color 0.3s ease; /* Add transition for smooth color change */
+    cursor: pointer;
+}
+
+.day-container:hover {
+    background-color: lightblue; /* Change background color on hover */
+}
+
+.day-container p {
+    font-size: 12px; /* Override the font-size */
+    color: #000000; /* Override the color */
+}
+
+#plot-container .modebar-container {
+    display: none !important;
+}
 

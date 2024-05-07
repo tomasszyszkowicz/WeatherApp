@@ -31,8 +31,24 @@ class ForecastWeather:
         temperatures = [
             self.forecast_weather[date]["avgtemp"] for date in self.forecast_weather
         ]
+
+        pictures = []
+
+        # Loop through each date in the forecast_weather dictionary
+        for date, data in self.forecast_weather.items():
+            # Check if "hourly" data is available for the date
+            if "hourly" in data:
+                # Loop through hourly data
+                for hour_data in data["hourly"]:
+                    # Check if the hour is "1200"
+                    if hour_data["time"] == "1200":
+                        # Check if "weather_icons" is available and it's a list with at least one URL
+                        if "weather_icons" in hour_data and isinstance(hour_data["weather_icons"], list) and len(hour_data["weather_icons"]) > 0:
+                            # Append the first URL in the "weather_icons" list to the pictures list
+                            pictures.append(hour_data["weather_icons"][0])
+        
         dates = [date for date in self.forecast_weather]
-        return JsonResponse({"temperatures": temperatures, "dates": dates})
+        return JsonResponse({"temperatures": temperatures, "weather_icons": pictures, "dates": dates})
 
     def get_specific_forecast_day(self, date):
         """
@@ -104,13 +120,11 @@ class ForecastWeather:
                 x=dates, y=temperatures, mode="lines+markers", name="Temperature"
             )
         )
-        title_text = "Temperature in upcoming days in " + self.location
         plot.update_layout(
             showlegend=False,
-            title=title_text,
             yaxis_title="Temperature (°C)",
             autosize=True,  # Make plot autosize
-            margin=dict(l=100, r=100, t=100, b=50),  # Set plot height
+            margin=dict(l=100, r=100, t=20, b=50),  # Set plot height
             paper_bgcolor="rgb(25, 33, 48)",
             font=dict(
                 color="white"  # Change the text color here

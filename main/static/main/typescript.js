@@ -107,15 +107,43 @@ class APICall {
         }
     }
     displayForecastData(data) {
+        const day1 = document.getElementById('day1');
         const day2 = document.getElementById('day2');
         const day3 = document.getElementById('day3');
+        const day4 = document.getElementById('day4');
+        const day5 = document.getElementById('day5');
+        const day6 = document.getElementById('day6');
+        const day7 = document.getElementById('day7');
+        const temperature1 = document.getElementById('temperature1');
         const temperature2 = document.getElementById('temperature2');
         const temperature3 = document.getElementById('temperature3');
+        const temperature4 = document.getElementById('temperature4');
+        const temperature5 = document.getElementById('temperature5');
+        const temperature6 = document.getElementById('temperature6');
+        const temperature7 = document.getElementById('temperature7');
+        if (day1) {
+            day1.innerText = data.dates[0];
+        }
         if (day2) {
             day2.innerText = data.dates[1];
         }
         if (day3) {
             day3.innerText = data.dates[2];
+        }
+        if (day4) {
+            day4.innerText = data.dates[3];
+        }
+        if (day5) {
+            day5.innerText = data.dates[4];
+        }
+        if (day6) {
+            day6.innerText = data.dates[5];
+        }
+        if (day7) {
+            day7.innerText = data.dates[6];
+        }
+        if (temperature1) {
+            temperature1.innerText = data.temperatures[0] + "°C";
         }
         if (temperature2) {
             temperature2.innerText = data.temperatures[1] + "°C";
@@ -123,13 +151,28 @@ class APICall {
         if (temperature3) {
             temperature3.innerText = data.temperatures[2] + "°C";
         }
+        if (temperature4) {
+            temperature4.innerText = data.temperatures[3] + "°C";
+        }
+        if (temperature5) {
+            temperature5.innerText = data.temperatures[4] + "°C";
+        }
+        if (temperature6) {
+            temperature6.innerText = data.temperatures[5] + "°C";
+        }
+        if (temperature7) {
+            temperature7.innerText = data.temperatures[6] + "°C";
+        }
     }
     displayForecastPlot(data) {
         var data = JSON.parse(data.plot);
         var layout = {
             autosize: true,
         };
-        var config = { responsive: true };
+        var config = {
+            responsive: true,
+            displayModeBar: false
+        };
         window.Plotly.newPlot('plot-container', data, layout, config);
     }
     displayFavoriteLocations(data) {
