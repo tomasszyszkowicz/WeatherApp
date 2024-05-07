@@ -7,16 +7,12 @@ class APICall {
         this.getCall();
     }
     getCall() {
-        //add params to url
         let url = this.url + '/' + this.endpoint + '?';
         this.params.forEach((value, key) => {
             url += key + '=' + value + '&';
         });
-        //remove last &
         url = url.substring(0, url.length - 1);
-        //make get call
-        console.log(url);
-        fetch(url)
+        return fetch(url)
             .then(response => response.json())
             .then(data => {
             if (this.endpoint === "current") {
@@ -37,6 +33,7 @@ class APICall {
             else if (this.endpoint === "recent-locations") {
                 this.displayRecentLocations(data);
             }
+            return data; // Return data for chaining promises
         });
     }
     displayCurrentData(data) {
@@ -201,7 +198,10 @@ class APICall {
             responsive: true,
             displayModeBar: false
         };
-        window.Plotly.newPlot('plot-container', data, layout, config);
+        const plotContainer = document.getElementById('plot-container');
+        if (plotContainer) {
+            window.Plotly.newPlot('plot-container', data, layout, config);
+        }
     }
     displayFavoriteLocations(data) {
         console.log(data);
@@ -266,6 +266,17 @@ function getFavoriteLocations(username) {
 }
 function getRecentLocations(username) {
     new APICall("", "recent-locations", new Map([["username", username]]));
+}
+function getAllData(location, username) {
+    const promises = [
+        new APICall("/data", "current", new Map([["location", location]])).getCall(),
+        new APICall("/data", "location-info", new Map([["location", location]])).getCall(),
+        new APICall("/data", "forecast-plot", new Map([["location", location]])).getCall(),
+        new APICall("/data", "forecast-data", new Map([["location", location]])).getCall(),
+        new APICall("", "favorite-locations", new Map([["username", username]])).getCall(),
+        new APICall("", "recent-locations", new Map([["username", username]])).getCall()
+    ];
+    return Promise.all(promises);
 }
 function getDayName(dateString) {
     const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];

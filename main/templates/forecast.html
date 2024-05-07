@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="{% static 'main/newStyles.css' %}">
 </head>
 <body style="height: 100vh;">
+    <div class="loader-container">
+        <div class="loader"></div>
+    </div>
     <div class="main-container" style="margin-top: 50px;">
         <div class="container">
             <h1><span id="locationHeader"></span></h1>
@@ -86,7 +89,7 @@
     <button class="toggle-button" id="toggleButton"><b>⟩</b></button>
     <script src="{% static 'main/typescript.js' %}"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', async function () {
             var location = getQueryParamater('location');
             document.getElementById('locationHeader').textContent = getQueryParamater('location');
                     const leftContainer = document.querySelector('.left-container');
@@ -109,19 +112,12 @@
                     });
 
                     const username = document.getElementById('username').textContent;
-                    getFavoriteLocations(username);
-                    getRecentLocations(username);
-                    getForecastPlot(location);
-                    getForecastData(location);
+                    await Promise.all([
+                        getAllData("Ostrava", username),
+                    ]);
 
-            setTimeout(function() {
-                const leftContainer = document.querySelector('.left-container');
-                leftContainer.classList.add('visible');
-                isLeftContainerVisible = true;
-                const toggleButton = document.getElementById('toggleButton');
-                toggleButton.innerHTML = '<b>⟨</b>';
-                toggleButton.classList.add('visible');
-            }, 500);
+                    document.querySelector('.main-container').style.display = 'block';
+                    document.querySelector('.loader-container').style.display = 'none';
         });
 
         function getQueryParamater(name) {

@@ -11,17 +11,14 @@ class APICall {
         this.getCall();
     }
 
-    getCall() {
-        //add params to url
+    getCall(): Promise<any> {
         let url: string = this.url + '/' + this.endpoint + '?';
         this.params.forEach((value, key) => {
             url += key + '=' + value + '&';
         });
-        //remove last &
         url = url.substring(0, url.length - 1);
-        //make get call
-        console.log(url);
-        fetch(url)
+
+        return fetch(url)
             .then(response => response.json())
             .then(data => {
                 if (this.endpoint === "current") {
@@ -37,6 +34,7 @@ class APICall {
                 } else if (this.endpoint === "recent-locations") {
                     this.displayRecentLocations(data);
                 }
+                return data; // Return data for chaining promises
             });
     }
 
@@ -219,8 +217,12 @@ class APICall {
             responsive: true,
             displayModeBar: false
          };
-        (window as any).Plotly.newPlot('plot-container', data, layout, config);
+        const plotContainer = document.getElementById('plot-container');
+        if (plotContainer) {
+            (window as any).Plotly.newPlot('plot-container', data, layout, config);
+        }
     }
+
 
     displayFavoriteLocations(data: FavoriteLocation) {
         console.log(data);
@@ -295,6 +297,19 @@ function getFavoriteLocations(username: string): void {
 
 function getRecentLocations(username: string): void {
     new APICall("", "recent-locations", new Map([["username", username]]));
+}
+
+function getAllData(location: string, username: string): Promise<any[]> {
+    const promises: Promise<any>[] = [
+        new APICall("/data", "current", new Map([["location", location]])).getCall(),
+        new APICall("/data", "location-info", new Map([["location", location]])).getCall(),
+        new APICall("/data", "forecast-plot", new Map([["location", location]])).getCall(),
+        new APICall("/data", "forecast-data", new Map([["location", location]])).getCall(),
+        new APICall("", "favorite-locations", new Map([["username", username]])).getCall(),
+        new APICall("", "recent-locations", new Map([["username", username]])).getCall()
+    ];
+
+    return Promise.all(promises);
 }
 
 function getDayName(dateString: string): string {

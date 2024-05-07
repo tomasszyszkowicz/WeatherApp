@@ -91,8 +91,6 @@ body {
     background-color: #0056b3; /* Darker blue on hover */
 }
 
-
-
 .container {
     max-width: 100%;
     margin: 10px auto;
@@ -263,6 +261,7 @@ img {
 }
 
 .main-container {
+    display: none;
     max-width: 40%;
     margin: 10px auto;
     background-color: rgb(25, 33, 48);
@@ -303,3 +302,27 @@ img {
     display: none !important;
 }
 
+.loader-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.loader {
+    border: 8px solid #f3f3f3; /* Light grey */
+    border-top: 8px solid darkblue; /* Blue */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#searchContainer {
+    display: none;
+}

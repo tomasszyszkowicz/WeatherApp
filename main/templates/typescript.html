@@ -9,7 +9,10 @@
     <link rel="stylesheet" href="{% static 'main/newStyles.css' %}">
 </head>
 <body>
-    <div class="container" style="margin-top: 50px; width: 40%;">
+    <div class="loader-container">
+        <div class="loader"></div>
+    </div>
+    <div class="container" style="margin-top: 50px; width: 40%;" id="searchContainer">
         <input type="text" id="locationInput" placeholder="Enter city name">
         <button onclick="submitLocation()">Get Weather</button>
     </div>
@@ -122,11 +125,11 @@
     <script src="{% static 'main/typescript.js' %}"></script>
     <script>
         
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', async function () {
             const leftContainer = document.querySelector('.left-container');
             const toggleButton = document.getElementById('toggleButton');
 
-            let isLeftContainerVisible = false; // Initially hidden
+            let isLeftContainerVisible = true; // Initially hidden
 
             toggleButton.addEventListener('click', function () {
                 console.log('Button clicked');
@@ -141,21 +144,21 @@
                 }
                 isLeftContainerVisible = !isLeftContainerVisible; // Toggle the visibility state
             });
-
-            const username = document.getElementById('username').textContent;
-            getWeather("Ostrava");
-            getLocationInfo("Ostrava");
-            getForecastPlot("Ostrava");
-            getForecastData("Ostrava");
-            getFavoriteLocations(username);
-            getRecentLocations(username);
-
             setTimeout(function() {
                 const leftContainer = document.querySelector('.left-container');
                 leftContainer.classList.add('visible');
                 toggleButton.innerHTML = '<b>⟨</b>';
                 toggleButton.classList.add('visible');
-            }, 500);
+                isLeftContainerVisible = true;
+            }, 10);
+            const username = document.getElementById('username').textContent;
+            await Promise.all([
+                getAllData("Ostrava", username),
+            ]);
+
+            document.querySelector('.main-container').style.display = 'block';
+            document.getElementById('searchContainer').style.display = 'block';
+            document.querySelector('.loader-container').style.display = 'none';
         });
 
         function submitLocation() {
