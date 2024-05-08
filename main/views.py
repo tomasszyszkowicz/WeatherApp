@@ -178,11 +178,14 @@ def update_favorite_locations(request, username):
         # Update the favorite locations based on the PATCH request data
         try:
             data = json.loads(request.body.decode('utf-8'))
+            print(data)
         except json.JSONDecodeError:
             return JsonResponse({'error': 'Invalid JSON data'}, status=400)
         favorite_locations.location1 = data.get('location1', favorite_locations.location1)
+        print(favorite_locations.location1)
         favorite_locations.location2 = data.get('location2', favorite_locations.location2)
         favorite_locations.location3 = data.get('location3', favorite_locations.location3)
+        print(favorite_locations.location3)
         favorite_locations.save()
 
         return JsonResponse({'message': f'Favorite locations updated successfully for user {username}'}, status=200)

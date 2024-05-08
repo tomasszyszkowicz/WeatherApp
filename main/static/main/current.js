@@ -6,6 +6,7 @@ function submitLocation() {
     }
     const location = locationInput.value;
     redirect("current", location);
+    updateRecentLocations(location);
 }
 function createRedirect(endpoint, spanId) {
     console.log("clicked");

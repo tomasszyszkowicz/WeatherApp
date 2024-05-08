@@ -1,16 +1,18 @@
-"use strict";
-function updateRecentLocations(location) {
-    const username = document.getElementById('username').textContent;
+function updateRecentLocations(location: string): void {
+    const username = (document.getElementById('username') as HTMLElement).textContent;
     const url = `/update-recent-locations/${username}/`;
-    if (username === null) {
+
+    if(username === null){
         console.log("Username not found");
         return;
     }
+
     const csrfToken = getCookie('csrftoken');
-    if (csrfToken === null) {
+    if(csrfToken === null){
         console.log("CSRF token not found");
         return;
     }
+
     // Define the POST request options
     const options = {
         method: 'PATCH',
@@ -18,31 +20,34 @@ function updateRecentLocations(location) {
             'Content-Type': 'application/json',
             'X-CSRFToken': csrfToken
         },
-        body: JSON.stringify({ 'location': location }) // Convert location to JSON string
+        body: JSON.stringify({'location': location }) // Convert location to JSON string
     };
+
     // Make the POST request using fetch
     fetch(url, options)
         .then(response => {
-        if (!response.ok) {
-            throw new Error('Failed to update recent locations');
-        }
-        return response.json();
-    })
+            if (!response.ok) {
+                throw new Error('Failed to update recent locations');
+            }
+            return response.json();
+        })
         .then(data => {
-        console.log(data);
-        getRecentLocations(username);
-    })
+            console.log(data);
+            getRecentLocations(username);
+        })
         .catch(error => {
-        console.error('Error:', error); // Log any errors
-        // Handle error
-    });
+            console.error('Error:', error); // Log any errors
+            // Handle error
+        });
 }
-function updateFavoriteLocations(username, locationData) {
+
+function updateFavoriteLocations(username: string, locationData: { location1: string, location2: string, location3: string } ) {
     // Define the endpoint URL
     const url = `/update-favorite-locations/${username}/`;
     console.log(locationData);
+
     const csrfToken = getCookie('csrftoken');
-    if (csrfToken === null) {
+    if(csrfToken === null){
         console.log("CSRF token not found");
         return;
     }
@@ -55,20 +60,21 @@ function updateFavoriteLocations(username, locationData) {
         },
         body: JSON.stringify(locationData) // Convert locationData to JSON string
     };
+
     // Make the PATCH request using fetch
     fetch(url, options)
         .then(response => {
-        if (!response.ok) {
-            throw new Error('Failed to update favorite locations');
-        }
-        return response.json();
-    })
+            if (!response.ok) {
+                throw new Error('Failed to update favorite locations');
+            }
+            return response.json();
+        })
         .then(data => {
-        console.log(data); // Log the response data
-        // Handle successful response
-    })
+            console.log(data); // Log the response data
+            // Handle successful response
+        })
         .catch(error => {
-        console.error('Error:', error); // Log any errors
-        // Handle error
-    });
+            console.error('Error:', error); // Log any errors
+            // Handle error
+        });
 }
