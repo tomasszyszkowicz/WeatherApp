@@ -31,3 +31,15 @@ function createDateRedirect(endpoint, spanId) {
         console.log("span not found");
     }
 }
+function createDateRedirectWithAttribute(endpoint, spanId) {
+    const location = getQueryParamater('location');
+    const div = document.getElementById(spanId);
+    if (div) {
+        const date = div.getAttribute('data-date');
+        console.log(date);
+        redirect(endpoint, location, date);
+    }
+    else {
+        console.log("span not found");
+    }
+}

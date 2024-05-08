@@ -101,7 +101,7 @@ class APICall {
             localDate.innerText = date;
         }
         if (headerDate) {
-            headerDate.innerText = date;
+            headerDate.innerText = getQueryParamater('date') || '';
         }
         if (localTime) {
             localTime.innerText = time;
@@ -114,6 +114,13 @@ class APICall {
         }
     }
     displayForecastData(data) {
+        const div1 = document.getElementById('div1');
+        const div2 = document.getElementById('div2');
+        const div3 = document.getElementById('div3');
+        const div4 = document.getElementById('div4');
+        const div5 = document.getElementById('div5');
+        const div6 = document.getElementById('div6');
+        const div7 = document.getElementById('div7');
         const day1 = document.getElementById('day1');
         const day2 = document.getElementById('day2');
         const day3 = document.getElementById('day3');
@@ -135,6 +142,27 @@ class APICall {
         const temperature5 = document.getElementById('temperature5');
         const temperature6 = document.getElementById('temperature6');
         const temperature7 = document.getElementById('temperature7');
+        if (div1) {
+            div1.setAttribute("data-date", data.dates[0]);
+        }
+        if (div2) {
+            div2.setAttribute("data-date", data.dates[1]);
+        }
+        if (div3) {
+            div3.setAttribute("data-date", data.dates[2]);
+        }
+        if (div4) {
+            div4.setAttribute("data-date", data.dates[3]);
+        }
+        if (div5) {
+            div5.setAttribute("data-date", data.dates[4]);
+        }
+        if (div6) {
+            div6.setAttribute("data-date", data.dates[5]);
+        }
+        if (div7) {
+            div7.setAttribute("data-date", data.dates[6]);
+        }
         if (day1) {
             day1.innerText = getDayName(data.dates[0]);
         }

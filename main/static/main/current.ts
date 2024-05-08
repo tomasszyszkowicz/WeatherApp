@@ -30,3 +30,15 @@ function createDateRedirect(endpoint: string, spanId: string): void {
         console.log("span not found");
     }
 }
+
+function createDateRedirectWithAttribute(endpoint: string, spanId: string): void {
+    const location = getQueryParamater('location');
+    const div = document.getElementById(spanId);
+    if (div) {
+        const date = div.getAttribute('data-date');
+        console.log(date);
+        redirect(endpoint, location, date);
+    } else {
+        console.log("span not found");
+    }
+}

@@ -26,40 +26,40 @@
         <div id="plot-container" class="plot-container" style="margin-top: 0px; padding-top: 0px;">
         </div>
         <div class="forecast-container">
-            <div class="day-container" style="margin-left: 0px;">
-                <p style="font-size: 15px"><b><span id="day1"></span></b></p>
-                <img class="img-day" id="icon1">
-                <p style="font-size: 20px;"><b><span id="temperature1"></b></span>
+            <div class="day-container" style="margin-left: 0px;" id="div1" onclick="createDateRedirectWithAttribute('daily', 'div1')">
+            <p style="font-size: 15px"><b><span id="day1"></span></b></p>
+            <img class="img-day" id="icon1">
+            <p style="font-size: 20px;"><b><span id="temperature1"></b></span>
             </div>
-            <div class="day-container">
-                <p style="font-size: 15px"><b><span id="day2"></span></b></p>
-                <img class="img-day" id="icon2">
-                <p style="font-size: 20px;"><b><span id="temperature2"></b></span>
+            <div class="day-container" id="div2" onclick="createDateRedirectWithAttribute('daily', 'div2')">
+            <p style="font-size: 15px"><b><span id="day2"></span></b></p>
+            <img class="img-day" id="icon2">
+            <p style="font-size: 20px;"><b><span id="temperature2"></b></span>
             </div>
-            <div class="day-container">
-                <p style="font-size: 15px"><b><span id="day3"></span></b></p>
-                <img class="img-day" id="icon3">
-                <p style="font-size: 20px;"><b><span id="temperature3"></b></span>
+            <div class="day-container" id="div3" onclick="createDateRedirectWithAttribute('daily', 'div3')">
+            <p style="font-size: 15px"><b><span id="day3"></span></b></p>
+            <img class="img-day" id="icon3">
+            <p style="font-size: 20px;"><b><span id="temperature3"></b></span>
             </div>
-            <div class="day-container">
-                <p style="font-size: 15px"><b><span id="day4"></span></b></p>
-                <img class="img-day" id="icon4">
-                <p style="font-size: 20px;"><b><span id="temperature4"></b></span>
+            <div class="day-container" id="div4" onclick="createDateRedirectWithAttribute('daily', 'div4')">
+            <p style="font-size: 15px"><b><span id="day4"></span></b></p>
+            <img class="img-day" id="icon4">
+            <p style="font-size: 20px;"><b><span id="temperature4"></b></span>
             </div>
-            <div class="day-container">
-                <p style="font-size: 15px"><b><span id="day5"></span></b></p>
-                <img class="img-day" id="icon5">
-                <p style="font-size: 20px;"><b><span id="temperature5"></b></span>
+            <div class="day-container" id="div5" onclick="createDateRedirectWithAttribute('daily', 'div5')">
+            <p style="font-size: 15px"><b><span id="day5"></span></b></p>
+            <img class="img-day" id="icon5">
+            <p style="font-size: 20px;"><b><span id="temperature5"></b></span>
             </div>
-            <div class="day-container">
-                <p style="font-size: 15px"><b><span id="day6"></span></b></p>
-                <img class="img-day" id="icon6">
-                <p style="font-size: 20px;"><b><span id="temperature6"></b></span>
+            <div class="day-container" id="div6" onclick="createDateRedirectWithAttribute('daily', 'div6')">
+            <p style="font-size: 15px"><b><span id="day6"></span></b></p>
+            <img class="img-day" id="icon6">
+            <p style="font-size: 20px;"><b><span id="temperature6"></b></span>
             </div>
-            <div class="day-container" style="margin-right: 0px;">
-                <p style="font-size: 15px"><b><span id="day7"></span></b></p>
-                <img class="img-day" id="icon7">
-                <p style="font-size: 20px;"><b><span id="temperature7"></b></span>
+            <div class="day-container" style="margin-right: 0px;" id="div7" onclick="createDateRedirectWithAttribute('daily', 'div7')">
+            <p style="font-size: 15px"><b><span id="day7"></span></b></p>
+            <img class="img-day" id="icon7">
+            <p style="font-size: 20px;"><b><span id="temperature7"></b></span>
             </div>
         </div>
         <p>Click on specific day to see full weather metrics</p>
@@ -74,19 +74,19 @@
         </div>
         <div class="favorite-container">
             <h3>Favorite locations:</h3>
-            <a class="nav-a" onclick="createRedirect('current', 'favoriteLocation1')"><span id="favoriteLocation1"></span></a>
-            <a class="nav-a" onclick="createRedirect('current', 'favoriteLocation2')"><span id="favoriteLocation2"></span></a>
-            <a class="nav-a" onclick="createRedirect('current', 'favoriteLocation3')"><span id="favoriteLocation3"></span></a>
+            <a class="nav-a" onclick="createRedirect('current', 'favoriteLocation1')">‎<span id="favoriteLocation1"></span></a>
+            <a class="nav-a" onclick="createRedirect('current', 'favoriteLocation2')">‎<span id="favoriteLocation2"></span></a>
+            <a class="nav-a" onclick="createRedirect('current', 'favoriteLocation3')">‎<span id="favoriteLocation3"></span></a>
             <a class="edit-a" onclick="showModal()">Edit</a>
         </div>
         <div class="recent-container">
             <h3>Recent searches:</h3>
-            <a class="nav-a" onclick="createRedirect('current', 'recentLocation1')"><span id="recentLocation1"></span></a>
-            <a class="nav-a" onclick="createRedirect('current', 'recentLocation2')"><span id="recentLocation2"></span></a>
-            <a class="nav-a" onclick="createRedirect('current', 'recentLocation3')"><span id="recentLocation3"></span></a>
-            <a class="nav-a" onclick="createRedirect('current', 'recentLocation4')"><span id="recentLocation4"></span></a>
-            <a class="nav-a" onclick="createRedirect('current', 'recentLocation5')"><span id="recentLocation5"></span></a>
-            <a class="nav-a" onclick="createRedirect('current', 'recentLocation6')"><span id="recentLocation6"></span></a>
+            <a class="nav-a" onclick="createRedirect('current', 'recentLocation1')">‎<span id="recentLocation1"></span></a>
+            <a class="nav-a" onclick="createRedirect('current', 'recentLocation2')">‎<span id="recentLocation2"></span></a>
+            <a class="nav-a" onclick="createRedirect('current', 'recentLocation3')">‎<span id="recentLocation3"></span></a>
+            <a class="nav-a" onclick="createRedirect('current', 'recentLocation4')">‎<span id="recentLocation4"></span></a>
+            <a class="nav-a" onclick="createRedirect('current', 'recentLocation5')">‎<span id="recentLocation5"></span></a>
+            <a class="nav-a" onclick="createRedirect('current', 'recentLocation6')">‎<span id="recentLocation6"></span></a>
         </div>
     </div>
     <button class="toggle-button" id="toggleButton"><b>⟩</b></button>
