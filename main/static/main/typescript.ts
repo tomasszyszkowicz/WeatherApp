@@ -33,6 +33,8 @@ class APICall {
                     this.displayFavoriteLocations(data);
                 } else if (this.endpoint === "recent-locations") {
                     this.displayRecentLocations(data);
+                } else if (this.endpoint === "forecast-day-plot") {
+                    this.displayDayForecastPlot(data);
                 }
                 return data; // Return data for chaining promises
             });
@@ -223,6 +225,20 @@ class APICall {
         }
     }
 
+    displayDayForecastPlot(data: any) {
+        var data = JSON.parse(data.plot);
+        var layout = {
+            autosize: true,
+        };
+        var config = { 
+            responsive: true,
+            displayModeBar: false
+         };
+        const plotContainer = document.getElementById('day-plot-container');
+        if (plotContainer) {
+            (window as any).Plotly.newPlot('day-plot-container', data, layout, config);
+        }
+    }
 
     displayFavoriteLocations(data: FavoriteLocation) {
         console.log(data);
@@ -299,12 +315,13 @@ function getRecentLocations(username: string): void {
     new APICall("", "recent-locations", new Map([["username", username]]));
 }
 
-function getAllData(location: string, username: string): Promise<any[]> {
+function getAllData(location: string, username: string, date: string): Promise<any[]> {
     const promises: Promise<any>[] = [
         new APICall("/data", "current", new Map([["location", location]])).getCall(),
         new APICall("/data", "location-info", new Map([["location", location]])).getCall(),
         new APICall("/data", "forecast-plot", new Map([["location", location]])).getCall(),
         new APICall("/data", "forecast-data", new Map([["location", location]])).getCall(),
+        new APICall("/data", "forecast-day-plot", new Map([["location", location], ["date", date]])).getCall(),
         new APICall("", "favorite-locations", new Map([["username", username]])).getCall(),
         new APICall("", "recent-locations", new Map([["username", username]])).getCall()
     ];

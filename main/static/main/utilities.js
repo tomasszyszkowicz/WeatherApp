@@ -61,11 +61,16 @@ function setupPage() {
                 isLeftContainerVisible = !isLeftContainerVisible; // Toggle the visibility state
             });
         }
+        var date = getQueryParamater('date');
+        if (!date) {
+            date = new Date().toISOString().split('T')[0];
+            console.log(date);
+        }
         if (!location || !username) {
             return;
         }
         yield Promise.all([
-            getAllData(location, username),
+            getAllData(location, username, date),
         ]);
         const mainContainer = document.querySelector('.main-container');
         if (mainContainer) {

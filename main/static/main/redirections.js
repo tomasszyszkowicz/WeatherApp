@@ -1,8 +1,17 @@
 "use strict";
-function redirect(endpoint, location = null) {
-    if (location === null) {
-        location = getQueryParamater('location');
-        window.location.href = `/${endpoint}?location=${location}`;
+function redirect(endpoint, location = null, date) {
+    var url = '';
+    url += `/${endpoint}`;
+    console.log(location);
+    if (!(location === null)) {
+        url += `?location=${location}`;
     }
-    window.location.href = `/${endpoint}?location=${location}`;
+    else {
+        location = getQueryParamater('location');
+        url += `?location=${location}`;
+    }
+    if (date) {
+        url += `&date=${date}`;
+    }
+    window.location.href = url;
 }

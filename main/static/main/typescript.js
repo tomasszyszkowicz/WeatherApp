@@ -33,6 +33,9 @@ class APICall {
             else if (this.endpoint === "recent-locations") {
                 this.displayRecentLocations(data);
             }
+            else if (this.endpoint === "forecast-day-plot") {
+                this.displayDayForecastPlot(data);
+            }
             return data; // Return data for chaining promises
         });
     }
@@ -203,6 +206,20 @@ class APICall {
             window.Plotly.newPlot('plot-container', data, layout, config);
         }
     }
+    displayDayForecastPlot(data) {
+        var data = JSON.parse(data.plot);
+        var layout = {
+            autosize: true,
+        };
+        var config = {
+            responsive: true,
+            displayModeBar: false
+        };
+        const plotContainer = document.getElementById('day-plot-container');
+        if (plotContainer) {
+            window.Plotly.newPlot('day-plot-container', data, layout, config);
+        }
+    }
     displayFavoriteLocations(data) {
         console.log(data);
         console.log("ahoj");
@@ -267,12 +284,13 @@ function getFavoriteLocations(username) {
 function getRecentLocations(username) {
     new APICall("", "recent-locations", new Map([["username", username]]));
 }
-function getAllData(location, username) {
+function getAllData(location, username, date) {
     const promises = [
         new APICall("/data", "current", new Map([["location", location]])).getCall(),
         new APICall("/data", "location-info", new Map([["location", location]])).getCall(),
         new APICall("/data", "forecast-plot", new Map([["location", location]])).getCall(),
         new APICall("/data", "forecast-data", new Map([["location", location]])).getCall(),
+        new APICall("/data", "forecast-day-plot", new Map([["location", location], ["date", date]])).getCall(),
         new APICall("", "favorite-locations", new Map([["username", username]])).getCall(),
         new APICall("", "recent-locations", new Map([["username", username]])).getCall()
     ];

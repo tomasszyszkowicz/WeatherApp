@@ -91,13 +91,24 @@ class ForecastWeather:
 
         # Create a plot from the temperatures and hours
         plot = go.Figure()
+        line_color_rgb = (255, 20, 147)
         plot.add_trace(
             go.Scatter(
-                x=hours, y=temperatures, mode="lines+markers", name="Temperature"
+                x=hours, y=temperatures, mode="lines+markers", name="Temperature", line=dict(color='rgb{}'.format(line_color_rgb), width=4)
             )
         )
         title_text = "Temperature in " + self.location + " on " + date  # add the date
-        plot.update_layout(title=title_text, yaxis_title="Temperature (°C)")
+        plot.update_layout(
+            showlegend=False,
+            yaxis_title="Temperature (°C)",
+            autosize=True,  # Make plot autosize
+            margin=dict(l=100, r=50, t=20, b=50),  # Set plot height
+            plot_bgcolor="rgb(25, 33, 48)",
+            paper_bgcolor="rgb(25, 33, 48)",
+            font=dict(
+                color="white"  # Change the text color here
+            ),
+            )
         plot_json = plot.to_json()
 
         return JsonResponse({"plot": plot_json})

@@ -1,7 +1,17 @@
-function redirect(endpoint: string, location: string | null = null): void{
-    if (location === null) {
+function redirect(endpoint: string, location: string | null = null, date: string | null): void{
+    var url = '';
+    url += `/${endpoint}`;
+    console.log(location)
+    if (!(location === null)) {
+        url+= `?location=${location}`;
+    } else {
         location = getQueryParamater('location');
-        window.location.href = `/${endpoint}?location=${location}`;
+        url+= `?location=${location}`;
     }
-    window.location.href = `/${endpoint}?location=${location}`;   
+        
+    if (date){
+        url+= `&date=${date}`;
+    }
+
+    window.location.href = url;   
 }

@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forecast Genius</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link rel="stylesheet" href="{% static 'main/newStyles.css' %}">
+</head>
+<body style="height: 100vh;">
+    <div class="loader-container">
+        <div class="loader"></div>
+    </div>
+    <div class="main-container" style="margin-top: 50px;">
+        <div class="container">
+            <h1><span id="locationHeader"></span></h1>
+            <hr>
+        </div>  
+        <div class="container" style="margin-bottom: 0px;">
+            <h1 style="margin-bottom: 0px;">Daily Weather</h1>
+        </div>
+        <div id="day-plot-container" class="plot-container" style="margin-top: 0px; padding-top: 0px;">
+        </div>
+        <div class="forecast-container">
+            <div class="day-container" style="margin-left: 0px;">
+                <p style="font-size: 15px"><b><span id="day1"></span></b></p>
+                <img class="img-day" id="icon1">
+                <p style="font-size: 20px;"><b><span id="temperature1"></b></span>
+            </div>
+            <div class="day-container">
+                <p style="font-size: 15px"><b><span id="day2"></span></b></p>
+                <img class="img-day" id="icon2">
+                <p style="font-size: 20px;"><b><span id="temperature2"></b></span>
+            </div>
+            <div class="day-container">
+                <p style="font-size: 15px"><b><span id="day3"></span></b></p>
+                <img class="img-day" id="icon3">
+                <p style="font-size: 20px;"><b><span id="temperature3"></b></span>
+            </div>
+            <div class="day-container">
+                <p style="font-size: 15px"><b><span id="day4"></span></b></p>
+                <img class="img-day" id="icon4">
+                <p style="font-size: 20px;"><b><span id="temperature4"></b></span>
+            </div>
+            <div class="day-container">
+                <p style="font-size: 15px"><b><span id="day5"></span></b></p>
+                <img class="img-day" id="icon5">
+                <p style="font-size: 20px;"><b><span id="temperature5"></b></span>
+            </div>
+            <div class="day-container">
+                <p style="font-size: 15px"><b><span id="day6"></span></b></p>
+                <img class="img-day" id="icon6">
+                <p style="font-size: 20px;"><b><span id="temperature6"></b></span>
+            </div>
+            <div class="day-container" style="margin-right: 0px;">
+                <p style="font-size: 15px"><b><span id="day7"></span></b></p>
+                <img class="img-day" id="icon7">
+                <p style="font-size: 20px;"><b><span id="temperature7"></b></span>
+            </div>
+        </div>
+        <p>Click on specific day to see full weather metrics</p>
+    </div>
+    <div id="navBar" class="left-container">
+        <div class="user-container">
+            <h2 style="margin-bottom: 30px;">FORECAST GENIUS</h2>
+            <h3>Logged in as:</h3>
+            <p id="username">{{ user.username }}</p>
+            <p>{{ user.email }}</p>
+            <a class="logout-a" href="{% url 'logout' %}">Logout</a>
+        </div>
+        <div class="favorite-container">
+            <h3>Favorite locations:</h3>
+            <a class="nav-a"><span id="favoriteLocation1"></span></a>
+            <a class="nav-a"><span id="favoriteLocation2"></span></a>
+            <a class="nav-a"><span id="favoriteLocation3"></span></a>
+            <a class="edit-a">Edit</a>
+        </div>
+        <div class="recent-container">
+            <h3>Recent locations:</h3>
+            <a class="nav-a"><span id="recentLocation1"></span></a>
+            <a class="nav-a"><span id="recentLocation2"></span></a>
+            <a class="nav-a"><span id="recentLocation3"></span></a>
+            <a class="nav-a"><span id="recentLocation4"></span></a>
+            <a class="nav-a"><span id="recentLocation5"></span></a>
+            <a class="nav-a"><span id="recentLocation6"></span></a>
+        </div>
+    </div>
+    <button class="toggle-button" id="toggleButton"><b>⟩</b></button>
+    <script src="{% static 'main/utilities.js' %}"></script>
+    <script src="{% static 'main/typescript.js' %}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async function () {
+            setupPage();
+        });
+    </script>
+</body>
+</html>

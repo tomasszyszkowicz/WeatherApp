@@ -5,7 +5,7 @@ function submitLocation() {
         return;
     }
     const location = locationInput.value;
-    redirect("current", location);
+    redirect("current", location, null);
     updateRecentLocations(location);
 }
 function createRedirect(endpoint, spanId) {
@@ -14,7 +14,18 @@ function createRedirect(endpoint, spanId) {
     if (span) {
         console.log("span");
         const spanContent = span.textContent;
-        redirect(endpoint, spanContent);
+        redirect(endpoint, spanContent, null);
+    }
+    else {
+        console.log("span not found");
+    }
+}
+function createDateRedirect(endpoint, spanId) {
+    const location = getQueryParamater('location');
+    const span = document.getElementById(spanId);
+    if (span) {
+        const date = span.textContent;
+        redirect(endpoint, location, date);
     }
     else {
         console.log("span not found");
