@@ -6,5 +6,16 @@ function submitLocation() {
     }
     const location = locationInput.value;
     redirect("current", location);
-    updateRecentLocations(location);
+}
+function createRedirect(endpoint, spanId) {
+    console.log("clicked");
+    const span = document.getElementById(spanId);
+    if (span) {
+        console.log("span");
+        const spanContent = span.textContent;
+        redirect(endpoint, spanContent);
+    }
+    else {
+        console.log("span not found");
+    }
 }
