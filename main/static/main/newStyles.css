@@ -13,7 +13,7 @@ body {
     left: -265px; /* Initially off-screen to the left */
     height: 100vh; /* Extend from top to bottom of the viewport */
     width: 300px; /* Adjust width as needed */
-    background-color: rgba(0, 0, 0, 0.8); /* Dark blue background with 80% opacity */
+    background-color: rgb(25, 33, 48); /* Dark blue background with 80% opacity */
     color: #ffffff; /* White text */
     padding: 20px;
     box-sizing: border-box; /* Include padding and border in width calculation */
@@ -186,7 +186,7 @@ button:hover {
 a {
     display: inline-block;
     padding: 10px 20px;
-    background-color: black;
+    background-color: grey;
     color: white;
     border-radius: 5px; /* Blue link color */
     text-decoration: none;
@@ -234,6 +234,11 @@ a {
     border-radius: 5px;
     text-decoration: none;
     cursor: pointer;
+}
+
+.nav-a:hover {
+    background-color: grey;
+    color: black;
 }
 
 /* Existing styles */
@@ -451,5 +456,60 @@ img {
 }
 
 .password-container p a:hover {
+    text-decoration: underline;
+}
+
+.login-container {
+    width: 300px;
+    padding: 20px;
+    margin: 100px auto;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.login-container h1 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.login-container input[type="text"], .login-container input[type="password"], .login-container input[type="email"]{
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.login-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.login-container button:hover {
+    background-color: #0056b3;
+}
+
+.login-container p {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.login-container p a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.login-container p a:hover {
     text-decoration: underline;
 }

@@ -55,10 +55,10 @@ async function setupPage() {
     }
     var date = getQueryParamater('date');
     if (!date) {
-        date = new Date().toISOString().split('T')[0];
+        date = new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toISOString().split('T')[0];
         console.log(date)
     }
-    if (!location || !username) {
+    if (!location || !username || !date) {
         return;
     }
     await Promise.all([
