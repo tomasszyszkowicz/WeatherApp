@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="{% static 'main/newStyles.css' %}">
 </head>
 <body style="height: 100vh;">
+    <div id="modal" class="modal">
+        <div class="modal-content" id="profileEditDetails"></div>
+    </div>
     <div class="loader-container">
         <div class="loader"></div>
     </div>
@@ -71,24 +74,28 @@
         </div>
         <div class="favorite-container">
             <h3>Favorite locations:</h3>
-            <a class="nav-a"><span id="favoriteLocation1"></span></a>
-            <a class="nav-a"><span id="favoriteLocation2"></span></a>
-            <a class="nav-a"><span id="favoriteLocation3"></span></a>
-            <a class="edit-a">Edit</a>
+            <a class="nav-a" onclick="createRedirect('current', 'favoriteLocation1')"><span id="favoriteLocation1"></span></a>
+            <a class="nav-a" onclick="createRedirect('current', 'favoriteLocation2')"><span id="favoriteLocation2"></span></a>
+            <a class="nav-a" onclick="createRedirect('current', 'favoriteLocation3')"><span id="favoriteLocation3"></span></a>
+            <a class="edit-a" onclick="showModal()">Edit</a>
         </div>
         <div class="recent-container">
-            <h3>Recent locations:</h3>
-            <a class="nav-a"><span id="recentLocation1"></span></a>
-            <a class="nav-a"><span id="recentLocation2"></span></a>
-            <a class="nav-a"><span id="recentLocation3"></span></a>
-            <a class="nav-a"><span id="recentLocation4"></span></a>
-            <a class="nav-a"><span id="recentLocation5"></span></a>
-            <a class="nav-a"><span id="recentLocation6"></span></a>
+            <h3>Recent searches:</h3>
+            <a class="nav-a" onclick="createRedirect('current', 'recentLocation1')"><span id="recentLocation1"></span></a>
+            <a class="nav-a" onclick="createRedirect('current', 'recentLocation2')"><span id="recentLocation2"></span></a>
+            <a class="nav-a" onclick="createRedirect('current', 'recentLocation3')"><span id="recentLocation3"></span></a>
+            <a class="nav-a" onclick="createRedirect('current', 'recentLocation4')"><span id="recentLocation4"></span></a>
+            <a class="nav-a" onclick="createRedirect('current', 'recentLocation5')"><span id="recentLocation5"></span></a>
+            <a class="nav-a" onclick="createRedirect('current', 'recentLocation6')"><span id="recentLocation6"></span></a>
         </div>
     </div>
     <button class="toggle-button" id="toggleButton"><b>⟩</b></button>
     <script src="{% static 'main/utilities.js' %}"></script>
+    <script src="{% static 'main/redirections.js' %}"></script>
+    <script src="{% static 'main/patchRequests.js' %}"></script>
+    <script src="{% static 'main/current.js' %}"></script>
     <script src="{% static 'main/typescript.js' %}"></script>
+    <script src="{% static 'main/modal.js' %}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', async function () {
             setupPage();

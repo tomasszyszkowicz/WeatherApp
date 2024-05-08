@@ -49,11 +49,11 @@ class APICall {
         }
         const temperature = document.getElementById("temperature");
         if (temperature) {
-            temperature.innerText = data.temperature + "°C";
+            temperature.innerText = data.temperature + " °C";
         }
         const headerTemperature = document.getElementById("headerTemperature");
         if (headerTemperature) {
-            headerTemperature.innerText = data.temperature + "°C";
+            headerTemperature.innerText = data.temperature + " °C";
         }
         const humidity = document.getElementById("humidity");
         if (humidity) {
@@ -178,25 +178,25 @@ class APICall {
             icon7.src = data.weather_icons[6];
         }
         if (temperature1) {
-            temperature1.innerText = data.temperatures[0] + "°C";
+            temperature1.innerText = data.temperatures[0] + " °C";
         }
         if (temperature2) {
-            temperature2.innerText = data.temperatures[1] + "°C";
+            temperature2.innerText = data.temperatures[1] + " °C";
         }
         if (temperature3) {
-            temperature3.innerText = data.temperatures[2] + "°C";
+            temperature3.innerText = data.temperatures[2] + " °C";
         }
         if (temperature4) {
-            temperature4.innerText = data.temperatures[3] + "°C";
+            temperature4.innerText = data.temperatures[3] + " °C";
         }
         if (temperature5) {
-            temperature5.innerText = data.temperatures[4] + "°C";
+            temperature5.innerText = data.temperatures[4] + " °C";
         }
         if (temperature6) {
-            temperature6.innerText = data.temperatures[5] + "°C";
+            temperature6.innerText = data.temperatures[5] + " °C";
         }
         if (temperature7) {
-            temperature7.innerText = data.temperatures[6] + "°C";
+            temperature7.innerText = data.temperatures[6] + " °C";
         }
     }
     displayForecastPlot(data) {
@@ -284,11 +284,10 @@ class APICall {
             sunrise.innerText = data.astro.sunrise;
         }
         if (maxtemp) {
-            maxtemp.innerText = data.maxtemp;
-            +"°C";
+            maxtemp.innerText = data.maxtemp + " °C";
         }
         if (mintemp) {
-            mintemp.innerText = data.mintemp + "°C";
+            mintemp.innerText = data.mintemp + " °C";
         }
         for (let i = 0; i < data.hourly.length; i++) {
             const hourElement = document.getElementById(`hour${i + 1}`);
@@ -297,7 +296,7 @@ class APICall {
             }
             const temperatureElement = document.getElementById(`hourTemperature${i + 1}`);
             if (temperatureElement) {
-                temperatureElement.innerHTML = `${data.hourly[i].temperature}°C`; // Assuming temperatures are in Celsius
+                temperatureElement.innerHTML = `${data.hourly[i].temperature} °C`; // Assuming temperatures are in Celsius
             }
             const iconElement = document.getElementById(`hour${i + 1}img`);
             if (iconElement) {
