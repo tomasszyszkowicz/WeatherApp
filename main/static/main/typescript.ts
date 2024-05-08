@@ -35,6 +35,8 @@ class APICall {
                     this.displayRecentLocations(data);
                 } else if (this.endpoint === "forecast-day-plot") {
                     this.displayDayForecastPlot(data);
+                } else if (this.endpoint === "forecast-day") {
+                    this.displayForecastDayData(data);
                 }
                 return data; // Return data for chaining promises
             });
@@ -86,6 +88,7 @@ class APICall {
         const locationHeader: HTMLElement | null = document.getElementById('locationHeader');
         const locationHeader2: HTMLElement | null = document.getElementById('locationHeader2');
         const localDate: HTMLElement | null = document.getElementById('localDate');
+        const headerDate: HTMLElement | null = document.getElementById('headerDate');
         const localTime: HTMLElement | null = document.getElementById('localTime');
         const timezone: HTMLElement | null = document.getElementById('timezone');
         const utcOffset: HTMLElement | null = document.getElementById('utcOffset');
@@ -102,6 +105,10 @@ class APICall {
 
         if (localDate) {
             localDate.innerText = date;
+        }
+
+        if (headerDate) {
+            headerDate.innerText = date;
         }
 
         if (localTime) {
@@ -289,6 +296,41 @@ class APICall {
             location6.innerText = data.location6;
         }
     }
+
+    displayForecastDayData(data: any) {
+        const sunset: HTMLElement | null = document.getElementById('sunset');
+        const sunrise: HTMLElement | null = document.getElementById('sunrise');
+        const maxtemp: HTMLElement | null = document.getElementById('maxtemp');
+        const mintemp: HTMLElement | null = document.getElementById('mintemp');
+
+        if (sunset) {
+            sunset.innerText = data.astro.sunset;
+        }
+        if (sunrise) {
+            sunrise.innerText = data.astro.sunrise;
+        }
+        if (maxtemp) {
+            maxtemp.innerText = data.maxtemp; + "°C";
+        }
+        if (mintemp) {
+            mintemp.innerText = data.mintemp + "°C";
+        }
+
+        for (let i = 0; i < data.hourly.length; i++) {
+            const hourElement: HTMLElement | null = document.getElementById(`hour${i + 1}`);
+            if (hourElement) {
+                hourElement.innerHTML = `${convertToTime(data.hourly[i].time)}:`; // Assuming temperatures are in Celsius
+            }
+            const temperatureElement: HTMLElement | null = document.getElementById(`hourTemperature${i + 1}`);
+            if (temperatureElement) {
+                temperatureElement.innerHTML = `${data.hourly[i].temperature}°C`; // Assuming temperatures are in Celsius
+            }
+            const iconElement: HTMLImageElement | null = document.getElementById(`hour${i + 1}img`) as HTMLImageElement;
+            if (iconElement) {
+                iconElement.src = data.hourly[i].weather_icons[0];
+            }
+        }
+    }
 }
 
 function getWeather(location: string): void {
@@ -322,6 +364,7 @@ function getAllData(location: string, username: string, date: string): Promise<a
         new APICall("/data", "forecast-plot", new Map([["location", location]])).getCall(),
         new APICall("/data", "forecast-data", new Map([["location", location]])).getCall(),
         new APICall("/data", "forecast-day-plot", new Map([["location", location], ["date", date]])).getCall(),
+        new APICall("/data", "forecast-day", new Map([["location", location], ["date", date]])).getCall(),
         new APICall("", "favorite-locations", new Map([["username", username]])).getCall(),
         new APICall("", "recent-locations", new Map([["username", username]])).getCall()
     ];

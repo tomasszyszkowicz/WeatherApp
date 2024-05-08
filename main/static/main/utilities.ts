@@ -79,3 +79,25 @@ async function setupPage() {
     }
 
 };
+
+function convertToTime(stringTime: string): string {
+    // If the stringTime is "0", return "0:00"
+    if (stringTime === "0") {
+        return "0:00";
+    }
+
+    // If the stringTime is three characters long, convert it to "X:00" format
+    if (stringTime.length === 3) {
+        const hour: string = stringTime.charAt(0);
+        return hour + ":00";
+    }
+
+    // If the stringTime is longer, extract hours and minutes
+    const hours: string = stringTime.slice(0, 2);
+    const minutes: string = stringTime.slice(2);
+
+    // Concatenate hours and minutes with a colon in between
+    const formattedTime: string = hours + ":" + minutes;
+
+    return formattedTime;
+}

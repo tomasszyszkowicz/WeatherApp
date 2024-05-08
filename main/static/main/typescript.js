@@ -36,6 +36,9 @@ class APICall {
             else if (this.endpoint === "forecast-day-plot") {
                 this.displayDayForecastPlot(data);
             }
+            else if (this.endpoint === "forecast-day") {
+                this.displayForecastDayData(data);
+            }
             return data; // Return data for chaining promises
         });
     }
@@ -83,6 +86,7 @@ class APICall {
         const locationHeader = document.getElementById('locationHeader');
         const locationHeader2 = document.getElementById('locationHeader2');
         const localDate = document.getElementById('localDate');
+        const headerDate = document.getElementById('headerDate');
         const localTime = document.getElementById('localTime');
         const timezone = document.getElementById('timezone');
         const utcOffset = document.getElementById('utcOffset');
@@ -95,6 +99,9 @@ class APICall {
         }
         if (localDate) {
             localDate.innerText = date;
+        }
+        if (headerDate) {
+            headerDate.innerText = date;
         }
         if (localTime) {
             localTime.innerText = time;
@@ -265,6 +272,39 @@ class APICall {
             location6.innerText = data.location6;
         }
     }
+    displayForecastDayData(data) {
+        const sunset = document.getElementById('sunset');
+        const sunrise = document.getElementById('sunrise');
+        const maxtemp = document.getElementById('maxtemp');
+        const mintemp = document.getElementById('mintemp');
+        if (sunset) {
+            sunset.innerText = data.astro.sunset;
+        }
+        if (sunrise) {
+            sunrise.innerText = data.astro.sunrise;
+        }
+        if (maxtemp) {
+            maxtemp.innerText = data.maxtemp;
+            +"°C";
+        }
+        if (mintemp) {
+            mintemp.innerText = data.mintemp + "°C";
+        }
+        for (let i = 0; i < data.hourly.length; i++) {
+            const hourElement = document.getElementById(`hour${i + 1}`);
+            if (hourElement) {
+                hourElement.innerHTML = `${convertToTime(data.hourly[i].time)}:`; // Assuming temperatures are in Celsius
+            }
+            const temperatureElement = document.getElementById(`hourTemperature${i + 1}`);
+            if (temperatureElement) {
+                temperatureElement.innerHTML = `${data.hourly[i].temperature}°C`; // Assuming temperatures are in Celsius
+            }
+            const iconElement = document.getElementById(`hour${i + 1}img`);
+            if (iconElement) {
+                iconElement.src = data.hourly[i].weather_icons[0];
+            }
+        }
+    }
 }
 function getWeather(location) {
     new APICall("/data", "current", new Map([["location", location]]));
@@ -291,6 +331,7 @@ function getAllData(location, username, date) {
         new APICall("/data", "forecast-plot", new Map([["location", location]])).getCall(),
         new APICall("/data", "forecast-data", new Map([["location", location]])).getCall(),
         new APICall("/data", "forecast-day-plot", new Map([["location", location], ["date", date]])).getCall(),
+        new APICall("/data", "forecast-day", new Map([["location", location], ["date", date]])).getCall(),
         new APICall("", "favorite-locations", new Map([["username", username]])).getCall(),
         new APICall("", "recent-locations", new Map([["username", username]])).getCall()
     ];

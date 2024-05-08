@@ -8,58 +8,165 @@
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <link rel="stylesheet" href="{% static 'main/newStyles.css' %}">
 </head>
-<body style="height: 100vh;">
+<body style="height: 100%;">
     <div class="loader-container">
         <div class="loader"></div>
     </div>
-    <div class="main-container" style="margin-top: 50px;">
+    <div class="main-container" style="margin-top: 50px; margin-bottom: 100px;">
         <div class="container">
             <h1><span id="locationHeader"></span></h1>
             <hr>
         </div>  
         <div class="container" style="margin-bottom: 0px;">
-            <h1 style="margin-bottom: 0px;">Daily Weather</h1>
+            <h1 style="margin-bottom: 0px;">Daily Weather for <span id="headerDate"></span></h1>
         </div>
         <div id="day-plot-container" class="plot-container" style="margin-top: 0px; padding-top: 0px;">
         </div>
-        <div class="forecast-container">
-            <div class="day-container" style="margin-left: 0px;">
-                <p style="font-size: 15px"><b><span id="day1"></span></b></p>
-                <img class="img-day" id="icon1">
-                <p style="font-size: 20px;"><b><span id="temperature1"></b></span>
+        <div class="double-container">
+            <div class="container-left">
+                <h2>Sunset: <span id="sunset"></span></h2>
+                <h2>Sunrise: <span id="sunrise"></span></h2>
             </div>
-            <div class="day-container">
-                <p style="font-size: 15px"><b><span id="day2"></span></b></p>
-                <img class="img-day" id="icon2">
-                <p style="font-size: 20px;"><b><span id="temperature2"></b></span>
+            <div class="container-right">
+                <h2>Max temperature: <span id="maxtemp"></span></h2>
+                <h2>Min temperature: <span id="mintemp"></span></h2>
             </div>
-            <div class="day-container">
-                <p style="font-size: 15px"><b><span id="day3"></span></b></p>
-                <img class="img-day" id="icon3">
-                <p style="font-size: 20px;"><b><span id="temperature3"></b></span>
-            </div>
-            <div class="day-container">
-                <p style="font-size: 15px"><b><span id="day4"></span></b></p>
-                <img class="img-day" id="icon4">
-                <p style="font-size: 20px;"><b><span id="temperature4"></b></span>
-            </div>
-            <div class="day-container">
-                <p style="font-size: 15px"><b><span id="day5"></span></b></p>
-                <img class="img-day" id="icon5">
-                <p style="font-size: 20px;"><b><span id="temperature5"></b></span>
-            </div>
-            <div class="day-container">
-                <p style="font-size: 15px"><b><span id="day6"></span></b></p>
-                <img class="img-day" id="icon6">
-                <p style="font-size: 20px;"><b><span id="temperature6"></b></span>
-            </div>
-            <div class="day-container" style="margin-right: 0px;">
-                <p style="font-size: 15px"><b><span id="day7"></span></b></p>
-                <img class="img-day" id="icon7">
-                <p style="font-size: 20px;"><b><span id="temperature7"></b></span>
-            </div>
+        </div> 
+        <div class="container">
+            <h1>Hourly weather</h1>
         </div>
-        <p>Click on specific day to see full weather metrics</p>
+        <div class="double-container">
+            <div class="container-left">
+                <table>
+                    <tr>
+                        <td><h2><span id="hour1"></span></h2></td>
+                        <td><h2><span id="hourTemperature1"></span></h2></td>
+                        <td><img id="hour1img"></td>
+                    </tr>
+                    <tr>
+                        <td><h2><span id="hour2"></span></h2></td>
+                        <td><h2><span id="hourTemperature2"></span></h2></td>
+                        <td><img id="hour2img"></td>
+                    </tr>
+                    <tr>
+                        <td><h2><span id="hour3"></span></h2></td>
+                        <td><h2><span id="hourTemperature3"></span></h2></td>
+                        <td><img id="hour3img"></td>
+                    </tr>
+                    <tr>
+                        <td><h2><span id="hour4"></span></h2></td>
+                        <td><h2><span id="hourTemperature4"></span></h2></td>
+                        <td><img id="hour4img"></td>
+                    </tr>
+                    <tr>
+                        <td><h2><span id="hour5"></span></h2></td>
+                        <td><h2><span id="hourTemperature5"></span></h2></td>
+                        <td><img id="hour5img"></td>
+                    </tr>
+                    <tr>
+                        <td><h2><span id="hour6"></span></h2></td>
+                        <td><h2><span id="hourTemperature6"></span></h2></td>
+                        <td><img id="hour6img"></td>
+                    </tr>
+                    <tr>
+                        <td><h2><span id="hour7"></span></h2></td>
+                        <td><h2><span id="hourTemperature7"></span></h2></td>
+                        <td><img id="hour7img"></td>
+                    </tr>
+                    <tr>
+                        <td><h2><span id="hour8"></span></h2></td>
+                        <td><h2><span id="hourTemperature8"></span></h2></td>
+                        <td><img id="hour8img"></td>
+                    </tr>
+                    <tr>
+                        <td><h2><span id="hour9"></span></h2></td>
+                        <td><h2><span id="hourTemperature9"></span></h2></td>
+                        <td><img id="hour9img"></td>
+                    </tr>
+                    <tr>
+                        <td><h2><span id="hour10"></span></h2></td>
+                        <td><h2><span id="hourTemperature10"></span></h2></td>
+                        <td><img id="hour10img"></td>
+                    </tr>
+                    <tr>
+                        <td><h2><span id="hour11"></span></h2></td>
+                        <td><h2><span id="hourTemperature11"></span></h2></td>
+                        <td><img id="hour11img"></td>
+                    </tr>
+                    <tr>
+                        <td><h2><span id="hour12"></span></h2></td>
+                        <td><h2><span id="hourTemperature12"></span></h2></td>
+                        <td><img id="hour12img"></td>
+                    </tr>  
+                </table>
+            </div>
+            <div class="container-right">
+                <table>
+                    <tr>
+                        <td><h2><span id="hour13"></span></h2></td>
+                        <td><h2><span id="hourTemperature13"></span></h2></td>
+                        <td><img id="hour13img"></td>
+                    </tr>
+                    <tr>
+                        <td><h2><span id="hour14"></span></h2></td>
+                        <td><h2><span id="hourTemperature14"></span></h2></td>
+                        <td><img id="hour14img"></td>
+                    </tr>
+                    <tr>
+                        <td><h2><span id="hour15"></span></h2></td>
+                        <td><h2><span id="hourTemperature15"></span></h2></td>
+                        <td><img id="hour15img"></td>
+                    </tr>
+                    <tr>
+                        <td><h2><span id="hour16"></span></h2></td>
+                        <td><h2><span id="hourTemperature16"></span></h2></td>
+                        <td><img id="hour16img"></td>
+                    </tr>
+                    <tr>
+                        <td><h2><span id="hour17"></span></h2></td>
+                        <td><h2><span id="hourTemperature17"></span></h2></td>
+                        <td><img id="hour17img"></td>
+                    </tr>
+                    <tr>
+                        <td><h2><span id="hour18"></span></h2></td>
+                        <td><h2><span id="hourTemperature18"></span></h2></td>
+                        <td><img id="hour18img"></td>
+                    </tr>
+                    <tr>
+                        <td><h2><span id="hour19"></span></h2></td>
+                        <td><h2><span id="hourTemperature19"></span></h2></td>
+                        <td><img id="hour19img"></td>
+                    </tr>
+                    <tr>
+                        <td><h2><span id="hour20"></span></h2></td>
+                        <td><h2><span id="hourTemperature20"></span></h2></td>
+                        <td><img id="hour20img"></td>
+                    </tr>
+                    <tr>
+                        <td><h2><span id="hour21"></span></h2></td>
+                        <td><h2><span id="hourTemperature21"></span></h2></td>
+                        <td><img id="hour21img"></td>
+                    </tr>
+                    <tr>
+                        <td><h2><span id="hour22"></span></h2></td>
+                        <td><h2><span id="hourTemperature22"></span></h2></td>
+                        <td><img id="hour22img"></td>
+                    </tr>
+                    <tr>
+                        <td><h2><span id="hour23"></span></h2></td>
+                        <td><h2><span id="hourTemperature23"></span></h2></td>
+                        <td><img id="hour23img"></td>
+                    </tr>
+                    <tr>
+                        <td><h2><span id="hour24"></span></h2></td>
+                        <td><h2><span id="hourTemperature24"></span></h2></td>
+                        <td><img id="hour24img"></td>
+                    </tr>
+                </table>
+                
+            </div>
+
+        </div>
     </div>
     <div id="navBar" class="left-container">
         <div class="user-container">
