@@ -1,0 +1,140 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forecast Genius</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link rel="stylesheet" href="{% static 'main/newStyles.css' %}">
+</head>
+<body>
+    <div id="modal" class="modal">
+        <div class="modal-content" id="profileEditDetails"></div>
+    </div>
+    <div class="loader-container">
+        <div class="loader"></div>
+    </div>
+    <div class="container" style="margin-top: 50px; width: 40%;" id="searchContainer">
+        <input type="text" id="locationInput" placeholder="Enter city name">
+        <a class="search-a" onclick="submitLocation()">Get Weather</a>
+    </div>
+    <div class="main-container" style="margin-bottom: 50px;">
+    <div class="container">
+        <h1><span id="locationHeader"></span></h1>
+        <hr>
+    </div>
+    <div class="double-container">
+        <div class="container-left">
+            <h1>Current weather</h1>
+            <h2><span id="weatherDescription"></span></h2>
+            <img id="weatherIcon"><br>
+            <h2>Temperature: <span id="headerTemperature"></span></h2>
+        </div>
+        
+        <div class="container-right">
+            <h1>Location info</h1>
+            <table>
+                <tr>
+                    <td>Local date:</td>
+                    <td><span id="localDate"></span></td>
+                </tr>
+                <tr>
+                    <td>Local time:</td>
+                    <td><span id="localTime"></span></td>
+                </tr>
+                <tr>
+                    <td>Timezone:</td>
+                    <td><span id="timezone"></span></td>
+                </tr>
+                <tr>
+                    <td>UTC offset:</td>
+                    <td><span id="utcOffset"></span></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="container" style="padding-top: 0px;">
+        <h1 style="margin-bottom: 20px;">Current weather metrics</h1>
+        <table>
+            <tr>
+                <td>Temperature:</td>
+                <td><span id="temperature"></span></td>
+            </tr>
+            <tr>
+                <td>Humidity:</td>
+                <td><span id="humidity"></span></td>
+            </tr>
+            <tr>
+                <td>Wind speed:</td>
+                <td><span id="windSpeed"></span></td>
+            </tr>
+            <tr>
+                <td>Precipitation:</td>
+                <td><span id="precipitation"></span></td>
+            </tr>
+            <tr>
+                <td>Pressure:</td>
+                <td><span id="pressure"></span></td>
+            </tr>
+            <tr>
+                <td>UV Index:</td>
+                <td><span id="uvIndex"></span></td>
+            </tr>
+        </table>
+    </div>
+    <div class="double-container">
+        <div class="container-left">
+            <h1>Weather Forecast</h1>
+            <h3><span id="day2"></span>: <span id="temperature2"></span></h3>
+            <h3><span id="day3"></span>: <span id="temperature3"></span></h3>
+            <a class="nav-a" onclick="redirect('forecast')">See full forecast</a>
+        </div>
+        
+        <div class="container-right">
+            <h1>Full metrics</h1>
+            <h3>Sunrise, Sunset and more..</h3>
+            <h3>See full weather metrics for today</h3>
+            <a class="nav-a" onclick="createDateRedirect('daily', 'localDate')">Weather today</a>
+        </div>
+    </div>
+    </div>
+    <div id="navBar" class="left-container">
+        <div class="user-container">
+            <h2 style="margin-bottom: 30px;">FORECAST GENIUS</h2>
+            <h3>Logged in as:</h3>
+            <p id="username">{{ user.username }}</p>
+            <p>{{ user.email }}</p>
+            <a class="logout-a" href="{% url 'logout' %}">Logout</a>
+        </div>
+        <div class="favorite-container">
+            <h3>Favorite locations:</h3>
+            <a class="nav-a" onclick="createRedirect('current', 'favoriteLocation1')">‎<span id="favoriteLocation1"></span></a>
+            <a class="nav-a" onclick="createRedirect('current', 'favoriteLocation2')">‎<span id="favoriteLocation2"></span></a>
+            <a class="nav-a" onclick="createRedirect('current', 'favoriteLocation3')">‎<span id="favoriteLocation3"></span></a>
+            <a class="edit-a" onclick="showModal()">Edit</a>
+        </div>
+        <div class="recent-container">
+            <h3>Recent searches:</h3>
+            <a class="nav-a" onclick="createRedirect('current', 'recentLocation1')">‎<span id="recentLocation1"></span></a>
+            <a class="nav-a" onclick="createRedirect('current', 'recentLocation2')">‎<span id="recentLocation2"></span></a>
+            <a class="nav-a" onclick="createRedirect('current', 'recentLocation3')">‎<span id="recentLocation3"></span></a>
+            <a class="nav-a" onclick="createRedirect('current', 'recentLocation4')">‎<span id="recentLocation4"></span></a>
+            <a class="nav-a" onclick="createRedirect('current', 'recentLocation5')">‎<span id="recentLocation5"></span></a>
+            <a class="nav-a" onclick="createRedirect('current', 'recentLocation6')">‎<span id="recentLocation6"></span></a>
+        </div>
+    </div>
+    <button class="toggle-button" id="toggleButton"><b>⟩</b></button>
+    <script src="{% static 'main/utilities.js' %}"></script>
+    <script src="{% static 'main/redirections.js' %}"></script>
+    <script src="{% static 'main/patchRequests.js' %}"></script>
+    <script src="{% static 'main/current.js' %}"></script>
+    <script src="{% static 'main/typescript.js' %}"></script>
+    <script src="{% static 'main/modal.js' %}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async function () {
+            setupPage();
+        });
+    </script>
+</body>
+</html>
